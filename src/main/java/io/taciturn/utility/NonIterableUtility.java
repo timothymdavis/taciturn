@@ -1,4 +1,4 @@
-package spike;
+package io.taciturn.utility;
 
 import java.lang.reflect.Array;
 import java.util.ArrayDeque;
@@ -12,7 +12,7 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
 
-import static spike.Utility.$;
+import static io.taciturn.Utility.$;
 
 public class NonIterableUtility<Item> extends ObjectUtility<Item> {
 
@@ -22,7 +22,7 @@ public class NonIterableUtility<Item> extends ObjectUtility<Item> {
 
     @SuppressWarnings({ "unchecked", "ConstantConditions" })
     public Optional<Item[]> toArray() {
-        Item[] array = isNull() ? (Item[]) Array.newInstance(mustNotBeNull().getClass(), 1) : null;
+        Item[] array = isPresent() ? (Item[]) Array.newInstance(mustNotBeNull().getClass(), 1) : null;
         object.map(o -> array[0] = o);
         return Optional.ofNullable(array);
     }

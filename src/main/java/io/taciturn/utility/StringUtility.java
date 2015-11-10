@@ -1,4 +1,4 @@
-package spike;
+package io.taciturn.utility;
 
 import java.util.Optional;
 
@@ -8,12 +8,12 @@ public class StringUtility extends ComparableUtility<String> {
         super(object);
     }
 
-    public boolean isBlank() {
-        return object.map(String::trim).map(String::isEmpty).orElse(false);
+    public Optional<Boolean> isBlank() {
+        return object.map(String::trim).map(String::isEmpty);
     }
     
-    public boolean isEmpty() {
-        return object.map(String::isEmpty).orElse(false);
+    public Optional<Boolean> isEmpty() {
+        return object.map(String::isEmpty);
     }
 
     public Optional<Boolean> toBoolean() {

@@ -1,6 +1,12 @@
-package spike;
+package io.taciturn;
 
 import java.util.Collection;
+
+import io.taciturn.utility.ArrayUtility;
+import io.taciturn.utility.CollectionUtility;
+import io.taciturn.utility.ComparableUtility;
+import io.taciturn.utility.NonIterableUtility;
+import io.taciturn.utility.StringUtility;
 
 public class Utility {
 

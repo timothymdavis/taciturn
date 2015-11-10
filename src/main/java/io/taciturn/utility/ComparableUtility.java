@@ -1,8 +1,11 @@
-package spike;
+package io.taciturn.utility;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
-import static spike.Utility.$;
+import io.taciturn.Utility;
+
+import static io.taciturn.Utility.$;
 
 public class ComparableUtility<Item extends Comparable<Item>>
         extends NonIterableUtility<Item> {
@@ -11,24 +14,24 @@ public class ComparableUtility<Item extends Comparable<Item>>
         super(object);
     }
     
-    public boolean isBetween(Item lower, Item upper) {
-        return object.filter(isBetweenPredicate(lower, upper)).isPresent();
+    public Optional<Boolean> isBetween(Item lower, Item upper) {
+        return Optional.of(object.filter(isBetweenPredicate(lower, upper)).isPresent());
     }
 
-    public boolean isGreaterThan(Item lower) {
-        return object.filter(isGreaterThanPredicate(lower)).isPresent();
+    public Optional<Boolean> isGreaterThan(Item lower) {
+        return Optional.of(object.filter(isGreaterThanPredicate(lower)).isPresent());
     }
 
-    public boolean isGreaterThanOrEqual(Item lower) {
-        return object.filter(isGreaterThanOrEqualPredicate(lower)).isPresent();
+    public Optional<Boolean> isGreaterThanOrEqual(Item lower) {
+        return Optional.of(object.filter(isGreaterThanOrEqualPredicate(lower)).isPresent());
     }
 
-    public boolean isLessThan(Item upper) {
-        return object.filter(isLessThanPredicate(upper)).isPresent();
+    public Optional<Boolean> isLessThan(Item upper) {
+        return Optional.of(object.filter(isLessThanPredicate(upper)).isPresent());
     }
 
-    public boolean isLessThanOrEqual(Item upper) {
-        return object.filter(isLessThanOrEqualPredicate(upper)).isPresent();
+    public Optional<Boolean> isLessThanOrEqual(Item upper) {
+        return Optional.of(object.filter(isLessThanOrEqualPredicate(upper)).isPresent());
     }
 
     public Item mustBeBetween(Item lower, Item upper) {

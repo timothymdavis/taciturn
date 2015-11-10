@@ -1,4 +1,4 @@
-package spike;
+package io.taciturn.utility;
 
 public class InvalidContractException extends RuntimeException {
     

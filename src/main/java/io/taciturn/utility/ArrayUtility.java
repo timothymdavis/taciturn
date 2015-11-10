@@ -1,8 +1,8 @@
-package spike;
+package io.taciturn.utility;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,20 +10,23 @@ import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CollectionUtility<Container extends Collection<Item>, Item> extends ObjectUtility<Container> {
-    
+import io.taciturn.Utility;
+
+public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
+
     private final StreamUtility<Stream<Item>, Item> streamUtility;
 
-    public CollectionUtility(Container o) {
+    public ArrayUtility(Item[] o) {
         super(o);
-        streamUtility = new StreamUtility<>(object.map(Collection::stream).orElse(null));
+        streamUtility = new StreamUtility<>(object.map(Arrays::stream).orElse(null));
     }
-    
-    @SuppressWarnings("unchecked")
-    public <I> Optional<Iterable<I>> asIterable(Class<I> itemType) {
-        return object.map(o -> (Iterable<I>) o);
+
+    @SafeVarargs
+    public ArrayUtility(Item first, Item... rest) {
+        this(toArray(first, rest));
     }
     
     public Optional<? extends Set<Item>> toSet() {
@@ -60,6 +63,14 @@ public class CollectionUtility<Container extends Collection<Item>, Item> extends
 
     public Optional<ArrayDeque<Item>> toArrayDeque() {
         return streamUtility.toArrayDeque();
+    }
+
+    @SuppressWarnings("unchecked")
+    @SafeVarargs
+    private static <Item> Item[] toArray(Item first, Item... rest) {
+        Optional<ArrayList<Item>> items = new NonIterableUtility<>(first).toArrayList();
+        items.map(o -> o.addAll(Arrays.stream(new ArrayUtility<>(rest).mustNotBeNull()).collect(Collectors.toList())));
+        return Utility.$(items.orElse(null)).toArray((Class<? extends Item>) first.getClass()).orElse(null);
     }
 
 }

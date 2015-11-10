@@ -1,4 +1,4 @@
-package spike;
+package io.taciturn.utility;
 
 import java.util.HashSet;
 
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static spike.Utility.$;
+import static io.taciturn.Utility.$;
 
 public class ArrayObjectUtilityTest {
 

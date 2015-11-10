@@ -1,7 +1,10 @@
-package spike;
+package io.taciturn.utility;
 
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class ObjectUtility<Item> {
 
@@ -11,16 +14,36 @@ public class ObjectUtility<Item> {
         this.object = Optional.ofNullable(object);
     }
     
-    public boolean is(Predicate<Item> predicate) {
-        return object.map(predicate::test).orElse(false);
-    }
-
-    public boolean isNull() {
+    public boolean isPresent() {
         return object.isPresent();
     }
+    
+    public void ifPresent(Consumer<? super Item> consumer) {
+        object.ifPresent(consumer);
+    }
 
-    public boolean isNotPresent() {
-        return !isNull();
+    public Optional<Item> filter(Predicate<? super Item> predicate) {
+        return object.filter(predicate);
+    }
+    
+    public<U> Optional<U> map(Function<? super Item, ? extends U> mapper) {
+        return object.map(mapper);
+    }
+
+    public<U> Optional<U> flatMap(Function<? super Item, Optional<U>> mapper) {
+        return object.flatMap(mapper);
+    }
+    
+    public Item orElse(Item other) {
+        return object.orElse(other);
+    }
+
+    public Item orElseGet(Supplier<? extends Item> other) {
+        return object.orElseGet(other);
+    }
+
+    public <X extends Throwable> Item orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
+        return object.orElseThrow(exceptionSupplier);
     }
 
     public Item mustBe(Predicate<Item> predicate) {
@@ -31,10 +54,6 @@ public class ObjectUtility<Item> {
         return object.filter(predicate).orElseThrow(() -> new InvalidContractException(message));
     }
 
-    public Item mustBeNull() {
-        return mustBe(isNullPredicate(), createExpectedMessage("null"));
-    }
-
     public Item mustNotBe(Predicate<Item> predicate, String message) {
         return mustBe(predicate.negate(), message);
     }
@@ -43,8 +62,8 @@ public class ObjectUtility<Item> {
         return mustNotBe(isNullPredicate(), createExpectedMessage("non-null"));
     }
 
-    public Item get() {
-        return object.get();
+    public Optional<Item> optional() {
+        return object;
     }
 
     protected String createExpectedMessage(Object expected) {

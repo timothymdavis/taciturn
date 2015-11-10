@@ -1,39 +1,38 @@
-package spike;
+package io.taciturn.utility;
 
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
-import static spike.Utility.$;
+import static io.taciturn.Utility.$;
 
 public class ObjectUtilityTest {
     
     @Test
+    public void test() {
+        String s = $("blah", "blah").filter(o -> o.length <= 2).map(o -> o[0]).orElse(null);
+    }
+
+    @Test
     public void thisObjectGet() {
-        assertThat($((String) null).isNull(), is(false));
-        assertThat($("Value").get(), is("Value"));
-        assertThat($("Value").get(), not("Other"));
+        assertThat($("Value").optional().get(), is("Value"));
+        assertThat($("Value").optional().get(), not("Other"));
     }
 
     @Test
     public void thisObjectIsNull() {
-        assertThat($((String) null).isNotPresent(), is(true));
+        assertThat($((String) null).isPresent(), is(false));
     }
 
     @Test
     public void thisObjectIsNotNull() {
-        assertThat($(new Object()).isNull(), is(true));
+        assertThat($(new Object()).isPresent(), is(true));
     }
 
     @Test(expected = InvalidContractException.class)
     public void thisObjectMustNotBeNullButIs() {
         $((String) null).mustNotBeNull();
-    }
-
-    @Test(expected = InvalidContractException.class)
-    public void thisObjectMustBeNullButIsNot() {
-        $(new Object()).mustBeNull();
     }
 
     @Test

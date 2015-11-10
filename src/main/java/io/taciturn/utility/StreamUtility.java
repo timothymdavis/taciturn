@@ -1,4 +1,4 @@
-package spike;
+package io.taciturn.utility;
 
 import java.lang.reflect.Array;
 import java.util.ArrayDeque;
