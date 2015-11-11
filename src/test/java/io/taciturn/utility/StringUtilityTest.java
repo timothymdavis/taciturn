@@ -1,6 +1,7 @@
 package io.taciturn.utility;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.junit.Test;
 
@@ -13,22 +14,22 @@ public class StringUtilityTest {
 
     @Test
     public void thisStringIsEmpty() {
-        assertThat($("").isEmpty().get(), is(true));
+        assertThat($("").isEmpty(), is(true));
     }
 
     @Test
     public void thisStringIsNotEmpty() {
-        assertThat($(" ").isEmpty().get(), is(false));
+        assertThat($(" ").isNotEmpty(), is(true));
     }
 
     @Test
     public void thisStringIsBlank() {
-        assertThat($(" ").isBlank().get(), is(true));
+        assertThat($(" ").isBlank(), is(true));
     }
 
     @Test
     public void thisStringIsNotBlank() {
-        assertThat($(" a ").isBlank().get(), is(false));
+        assertThat($(" a ").isNotBlank(), is(true));
     }
 
     @Test

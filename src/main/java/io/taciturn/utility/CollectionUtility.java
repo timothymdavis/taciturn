@@ -18,12 +18,12 @@ public class CollectionUtility<Container extends Collection<Item>, Item> extends
 
     public CollectionUtility(Container o) {
         super(o);
-        streamUtility = new StreamUtility<>(object.map(Collection::stream).orElse(null));
+        streamUtility = new StreamUtility<>(map(Collection::stream).orElse(null));
     }
     
     @SuppressWarnings("unchecked")
     public <I> Optional<Iterable<I>> asIterable(Class<I> itemType) {
-        return object.map(o -> (Iterable<I>) o);
+        return map(o -> (Iterable<I>) o);
     }
     
     public Optional<? extends Set<Item>> toSet() {

@@ -23,7 +23,7 @@ public class NonIterableUtility<Item> extends ObjectUtility<Item> {
     @SuppressWarnings({ "unchecked", "ConstantConditions" })
     public Optional<Item[]> toArray() {
         Item[] array = isPresent() ? (Item[]) Array.newInstance(mustNotBeNull().getClass(), 1) : null;
-        object.map(o -> array[0] = o);
+        map(o -> array[0] = o);
         return Optional.ofNullable(array);
     }
     
@@ -52,7 +52,7 @@ public class NonIterableUtility<Item> extends ObjectUtility<Item> {
     }
 
     public <Container extends Collection<Item>> Optional<Container> to(Container collection) {
-        object.map($(collection).mustNotBeNull()::add);
+        map($(collection).mustNotBeNull()::add);
         return Optional.ofNullable(!collection.isEmpty() ? collection : null);
     }
 

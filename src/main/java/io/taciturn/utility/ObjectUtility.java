@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 
 public class ObjectUtility<Item> {
 
-    protected final Optional<Item> object;
+    private final Optional<Item> object;
 
     public ObjectUtility(Item object) {
         this.object = Optional.ofNullable(object);
@@ -30,8 +30,8 @@ public class ObjectUtility<Item> {
         return object.map(mapper);
     }
 
-    public<U> Optional<U> flatMap(Function<? super Item, Optional<U>> mapper) {
-        return object.flatMap(mapper);
+    public<U> Item get() {
+        return object.get();
     }
     
     public Item orElse(Item other) {

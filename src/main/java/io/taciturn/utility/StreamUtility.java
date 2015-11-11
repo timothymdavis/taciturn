@@ -20,13 +20,13 @@ public class StreamUtility<Container extends Stream<Item>, Item> extends ObjectU
     }
 
     public <CollectionType extends Collection<Item>> Optional<CollectionType> to(CollectionType collection) {
-        object.ifPresent(o -> o.forEach(collection::add));
+        ifPresent(o -> o.forEach(collection::add));
         return Optional.ofNullable(collection).filter(o -> !o.isEmpty());
     }
 
     @SuppressWarnings({ "unchecked", "ConstantConditions" })
     public Optional<Item[]> toArray(Class<? extends Item> itemType) {
-        return object.map(o -> o.toArray(i -> (Item[]) Array.newInstance(itemType, i)));
+        return map(o -> o.toArray(i -> (Item[]) Array.newInstance(itemType, i)));
     }
 
     public Optional<ArrayDeque<Item>> toArrayDeque() {

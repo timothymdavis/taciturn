@@ -3,6 +3,7 @@ package io.taciturn.utility;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,13 +16,15 @@ import java.util.stream.Stream;
 
 import io.taciturn.Utility;
 
+import static io.taciturn.Utility.$;
+
 public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
 
     private final StreamUtility<Stream<Item>, Item> streamUtility;
 
     public ArrayUtility(Item[] o) {
         super(o);
-        streamUtility = new StreamUtility<>(object.map(Arrays::stream).orElse(null));
+        streamUtility = new StreamUtility<>(map(Arrays::stream).orElse(null));
     }
 
     @SafeVarargs
@@ -68,9 +71,16 @@ public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
     @SuppressWarnings("unchecked")
     @SafeVarargs
     private static <Item> Item[] toArray(Item first, Item... rest) {
+        $(first).mustNotBeNull();
+        $(rest).mustNotBeNull();
+        $(first).mustBe(o -> $(rest).toList()
+                                    .map(Collection::stream)
+                                    .map(c -> c.allMatch(i -> i.getClass() == o.getClass()))
+                                    .orElse(false),
+                        "The type of the first item must match the rest.");
         Optional<ArrayList<Item>> items = new NonIterableUtility<>(first).toArrayList();
-        items.map(o -> o.addAll(Arrays.stream(new ArrayUtility<>(rest).mustNotBeNull()).collect(Collectors.toList())));
-        return Utility.$(items.orElse(null)).toArray((Class<? extends Item>) first.getClass()).orElse(null);
+        items.map(o -> o.addAll(Arrays.stream($(rest).mustNotBeNull()).collect(Collectors.toList())));
+        return $(items.orElse(null)).toArray((Class<? extends Item>) first.getClass()).orElse(null);
     }
 
 }
