@@ -12,51 +12,51 @@ public class ComparableUtility<Item extends Comparable<Item>>
     }
     
     public boolean isBetween(Item lower, Item upper) {
-        return between(lower, upper).orElse(false);
+        return between(lower, upper).isPresent();
     }
 
     public boolean isGreaterThan(Item lower) {
-        return greaterThan(lower).orElse(false);
+        return greaterThan(lower).isPresent();
     }
 
     public boolean isGreaterThanOrEqualTo(Item lower) {
-        return greaterThanOrEqualTo(lower).orElse(false);
+        return greaterThanOrEqualTo(lower).isPresent();
     }
 
     public boolean isLessThan(Item upper) {
-        return lessThan(upper).orElse(false);
+        return lessThan(upper).isPresent();
     }
 
     public boolean isLessThanOrEqualTo(Item upper) {
-        return lessThanOrEqualTo(upper).orElse(false);
+        return lessThanOrEqualTo(upper).isPresent();
     }
 
     public boolean isEqualTo(Item item) {
-        return equalTo(item).orElse(false);
+        return equalTo(item).isPresent();
     }
 
-    public ComparableUtility<Boolean> between(Item lower, Item upper) {
-        return $(filter(isBetweenPredicate(lower, upper)).isPresent());
+    public ComparableUtility<Item> between(Item lower, Item upper) {
+        return filter(isBetweenPredicate(lower, upper));
     }
 
-    public ComparableUtility<Boolean> greaterThan(Item lower) {
-        return $(filter(isGreaterThanPredicate(lower)).isPresent());
+    public ComparableUtility<Item> greaterThan(Item lower) {
+        return filter(isGreaterThanPredicate(lower));
     }
 
-    public ComparableUtility<Boolean> greaterThanOrEqualTo(Item lower) {
-        return $(filter(isGreaterThanOrEqualToPredicate(lower)).isPresent());
+    public ComparableUtility<Item> greaterThanOrEqualTo(Item lower) {
+        return filter(isGreaterThanOrEqualToPredicate(lower));
     }
 
-    public ComparableUtility<Boolean> lessThan(Item upper) {
-        return $(filter(isLessThanPredicate(upper)).isPresent());
+    public ComparableUtility<Item> lessThan(Item upper) {
+        return filter(isLessThanPredicate(upper));
     }
 
-    public ComparableUtility<Boolean> lessThanOrEqualTo(Item upper) {
-        return $(filter(isLessThanOrEqualToPredicate(upper)).isPresent());
+    public ComparableUtility<Item> lessThanOrEqualTo(Item upper) {
+        return filter(isLessThanOrEqualToPredicate(upper));
     }
 
-    public ComparableUtility<Boolean> equalTo(Item item) {
-        return $(filter(isEqualToPredicate(item)).isPresent());
+    public ComparableUtility<Item> equalTo(Item item) {
+        return filter(isEqualToPredicate(item));
     }
 
     public Item mustBeBetween(Item lower, Item upper) {
