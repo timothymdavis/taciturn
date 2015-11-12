@@ -7,11 +7,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
 import java.util.stream.Stream;
+
+import static io.taciturn.Utility.$;
 
 public class StreamUtility<Container extends Stream<Item>, Item> extends ObjectUtility<Container> {
 
@@ -19,45 +20,45 @@ public class StreamUtility<Container extends Stream<Item>, Item> extends ObjectU
         super(object);
     }
 
-    public <CollectionType extends Collection<Item>> Optional<CollectionType> to(CollectionType collection) {
+    public <CollectionType extends Collection<Item>> CollectionUtility<CollectionType, Item> to(CollectionType collection) {
         ifPresent(o -> o.forEach(collection::add));
-        return Optional.ofNullable(collection).filter(o -> !o.isEmpty());
+        return (CollectionUtility<CollectionType, Item>) $(collection).filter(o -> !o.isEmpty());
     }
 
     @SuppressWarnings({ "unchecked", "ConstantConditions" })
-    public Optional<Item[]> toArray(Class<? extends Item> itemType) {
-        return map(o -> o.toArray(i -> (Item[]) Array.newInstance(itemType, i)));
+    public ArrayUtility<Item> toArray(Class<? extends Item> itemType) {
+        return $(map(o -> o.toArray(i -> (Item[]) Array.newInstance(itemType, i))).orElse(null));
     }
 
-    public Optional<ArrayDeque<Item>> toArrayDeque() {
+    public CollectionUtility<ArrayDeque<Item>, Item> toArrayDeque() {
         return to(new ArrayDeque<>());
     }
 
-    public Optional<? extends Set<Item>> toSet() {
+    public CollectionUtility<? extends Set<Item>, Item> toSet() {
         return toHashSet();
     }
 
-    public Optional<HashSet<Item>> toHashSet() {
+    public CollectionUtility<HashSet<Item>, Item> toHashSet() {
         return to(new HashSet<>());
     }
 
-    public Optional<LinkedList<Item>> toLinkedList() {
+    public CollectionUtility<LinkedList<Item>, Item> toLinkedList() {
         return to(new LinkedList<>());
     }
 
-    public Optional<? extends List<Item>> toList() {
+    public CollectionUtility<? extends List<Item>, Item> toList() {
         return toArrayList();
     }
 
-    public Optional<ArrayList<Item>> toArrayList() {
+    public CollectionUtility<ArrayList<Item>, Item> toArrayList() {
         return to(new ArrayList<>());
     }
 
-    public Optional<PriorityQueue<Item>> toPriorityQueue() {
+    public CollectionUtility<PriorityQueue<Item>, Item> toPriorityQueue() {
         return to(new PriorityQueue<>());
     }
 
-    public Optional<Vector<Item>> toVector() {
+    public CollectionUtility<Vector<Item>, Item> toVector() {
         return to(new Vector<>());
     }
 

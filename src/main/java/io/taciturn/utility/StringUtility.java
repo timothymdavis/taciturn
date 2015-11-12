@@ -1,7 +1,8 @@
 package io.taciturn.utility;
 
-import java.util.Optional;
 import java.util.function.Predicate;
+
+import static io.taciturn.Utility.$;
 
 public class StringUtility extends ComparableUtility<String> {
 
@@ -14,67 +15,67 @@ public class StringUtility extends ComparableUtility<String> {
     }
     
     public boolean isEmpty() {
-        return empty().orElse(false);
+        return empty().isPresent();
     }
 
     public boolean isNotBlank() {
-        return notBlank().orElse(false);
+        return notBlank().isPresent();
     }
 
     public boolean isNotEmpty() {
-        return notEmpty().orElse(false);
+        return notEmpty().isPresent();
     }
 
-    public Optional<Boolean> blank() {
-        return map(String::trim).map(String::isEmpty);
+    public StringUtility blank() {
+        return filter(isBlankPredicate());
     }
 
-    public Optional<Boolean> empty() {
-        return map(String::isEmpty);
+    public StringUtility empty() {
+        return filter(isEmptyPredicate());
     }
 
-    public Optional<Boolean> notBlank() {
-        return blank().map(o -> !o);
+    public StringUtility notBlank() {
+        return filter(isBlankPredicate().negate());
     }
 
-    public Optional<Boolean> notEmpty() {
-        return empty().map(o -> !o);
+    public StringUtility notEmpty() {
+        return filter(isEmptyPredicate().negate());
     }
 
-    public Optional<Boolean> toBoolean() {
-        return map(Boolean::parseBoolean);
+    public ComparableUtility<Boolean> toBoolean() {
+        return $(map(Boolean::parseBoolean).orElse(null));
     }
 
-    public Optional<Double> toDouble() {
-        return map(Double::parseDouble);
+    public ComparableUtility<Double> toDouble() {
+        return $(map(Double::parseDouble).orElse(null));
     }
 
-    public Optional<Float> toFloat() {
-        return map(Float::parseFloat);
+    public ComparableUtility<Float> toFloat() {
+        return $(map(Float::parseFloat).orElse(null));
     }
 
-    public Optional<Integer> toInteger() {
-        return map(Integer::parseInt);
+    public ComparableUtility<Integer> toInteger() {
+        return $(map(Integer::parseInt).orElse(null));
     }
 
-    public Optional<Integer> toInteger(int radix) {
-        return map(o -> Integer.parseInt(o, radix));
+    public ComparableUtility<Integer> toInteger(int radix) {
+        return $(map(o -> Integer.parseInt(o, radix)).orElse(null));
     }
 
-    public Optional<Long> toLong() {
-        return map(Long::parseLong);
+    public ComparableUtility<Long> toLong() {
+        return $(map(Long::parseLong).orElse(null));
     }
 
-    public Optional<Long> toLong(int radix) {
-        return map(o -> Long.parseLong(o, radix));
+    public ComparableUtility<Long> toLong(int radix) {
+        return $(map(o -> Long.parseLong(o, radix)).orElse(null));
     }
 
-    public Optional<Short> toShort() {
-        return map(Short::parseShort);
+    public ComparableUtility<Short> toShort() {
+        return $(map(Short::parseShort).orElse(null));
     }
 
-    public Optional<Short> toShort(int radix) {
-        return map(o -> Short.parseShort(o, radix));
+    public ComparableUtility<Short> toShort(int radix) {
+        return $(map(o -> Short.parseShort(o, radix)).orElse(null));
     }
 
     public Predicate<String> isEmptyPredicate() {

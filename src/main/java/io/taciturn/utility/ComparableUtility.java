@@ -1,9 +1,6 @@
 package io.taciturn.utility;
 
-import java.util.Optional;
 import java.util.function.Predicate;
-
-import io.taciturn.Utility;
 
 import static io.taciturn.Utility.$;
 
@@ -38,28 +35,28 @@ public class ComparableUtility<Item extends Comparable<Item>>
         return equalTo(item).orElse(false);
     }
 
-    public Optional<Boolean> between(Item lower, Item upper) {
-        return Optional.of(filter(isBetweenPredicate(lower, upper)).isPresent());
+    public ComparableUtility<Boolean> between(Item lower, Item upper) {
+        return $(filter(isBetweenPredicate(lower, upper)).isPresent());
     }
 
-    public Optional<Boolean> greaterThan(Item lower) {
-        return Optional.of(filter(isGreaterThanPredicate(lower)).isPresent());
+    public ComparableUtility<Boolean> greaterThan(Item lower) {
+        return $(filter(isGreaterThanPredicate(lower)).isPresent());
     }
 
-    public Optional<Boolean> greaterThanOrEqualTo(Item lower) {
-        return Optional.of(filter(isGreaterThanOrEqualToPredicate(lower)).isPresent());
+    public ComparableUtility<Boolean> greaterThanOrEqualTo(Item lower) {
+        return $(filter(isGreaterThanOrEqualToPredicate(lower)).isPresent());
     }
 
-    public Optional<Boolean> lessThan(Item upper) {
-        return Optional.of(filter(isLessThanPredicate(upper)).isPresent());
+    public ComparableUtility<Boolean> lessThan(Item upper) {
+        return $(filter(isLessThanPredicate(upper)).isPresent());
     }
 
-    public Optional<Boolean> lessThanOrEqualTo(Item upper) {
-        return Optional.of(filter(isLessThanOrEqualToPredicate(upper)).isPresent());
+    public ComparableUtility<Boolean> lessThanOrEqualTo(Item upper) {
+        return $(filter(isLessThanOrEqualToPredicate(upper)).isPresent());
     }
 
-    public Optional<Boolean> equalTo(Item item) {
-        return Optional.of(filter(isEqualToPredicate(item)).isPresent());
+    public ComparableUtility<Boolean> equalTo(Item item) {
+        return $(filter(isEqualToPredicate(item)).isPresent());
     }
 
     public Item mustBeBetween(Item lower, Item upper) {

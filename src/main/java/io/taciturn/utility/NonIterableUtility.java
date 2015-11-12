@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
@@ -21,46 +20,47 @@ public class NonIterableUtility<Item> extends ObjectUtility<Item> {
     }
 
     @SuppressWarnings({ "unchecked", "ConstantConditions" })
-    public Optional<Item[]> toArray() {
+    public ArrayUtility<Item> toArray() {
         Item[] array = isPresent() ? (Item[]) Array.newInstance(mustNotBeNull().getClass(), 1) : null;
         map(o -> array[0] = o);
-        return Optional.ofNullable(array);
+        return $(array);
     }
     
-    public Optional<ArrayDeque<Item>> toArrayDeque() {
+    public CollectionUtility<ArrayDeque<Item>, Item> toArrayDeque() {
         return to(new ArrayDeque<>());
     }
 
-    public Optional<? extends Set<Item>> toSet() {
+    public CollectionUtility<? extends Set<Item>, Item> toSet() {
         return toHashSet();
     }
 
-    public Optional<HashSet<Item>> toHashSet() {
+    public CollectionUtility<HashSet<Item>, Item> toHashSet() {
         return to(new HashSet<>());
     }
 
-    public Optional<LinkedList<Item>> toLinkedList() {
+    public CollectionUtility<LinkedList<Item>, Item> toLinkedList() {
         return to(new LinkedList<>());
     }
 
-    public Optional<? extends List<Item>> toList() {
+    public CollectionUtility<? extends List<Item>, Item> toList() {
         return toArrayList();
     }
 
-    public Optional<ArrayList<Item>> toArrayList() {
+    public CollectionUtility<ArrayList<Item>, Item> toArrayList() {
         return to(new ArrayList<>());
     }
 
-    public <Container extends Collection<Item>> Optional<Container> to(Container collection) {
+    @SuppressWarnings("unchecked")
+    public <Container extends Collection<Item>> CollectionUtility<Container, Item> to(Container collection) {
         map($(collection).mustNotBeNull()::add);
-        return Optional.ofNullable(!collection.isEmpty() ? collection : null);
+        return (CollectionUtility<Container, Item>) $(collection);
     }
 
-    public Optional<PriorityQueue<Item>> toPriorityQueue() {
+    public CollectionUtility<PriorityQueue<Item>, Item> toPriorityQueue() {
         return to(new PriorityQueue<>());
     }
 
-    public Optional<Vector<Item>> toVector() {
+    public CollectionUtility<Vector<Item>, Item> toVector() {
         return to(new Vector<>());
     }
     

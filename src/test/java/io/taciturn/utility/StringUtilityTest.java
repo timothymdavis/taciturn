@@ -1,7 +1,6 @@
 package io.taciturn.utility;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import org.junit.Test;
 

@@ -27,6 +27,10 @@ public class Utility {
         return new CollectionUtility<>(object);
     }
 
+    public static ComparableUtility<Boolean> $(Boolean object) {
+        return new ComparableUtility<>(object);
+    }
+
     public static ComparableUtility<Character> $(Character object) {
         return new ComparableUtility<>(object);
     }

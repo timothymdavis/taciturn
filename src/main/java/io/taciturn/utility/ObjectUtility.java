@@ -6,9 +6,11 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import static io.taciturn.Utility.$;
+
 public class ObjectUtility<Item> {
 
-    private final Optional<Item> object;
+    private Optional<Item> object;
 
     public ObjectUtility(Item object) {
         this.object = Optional.ofNullable(object);
@@ -22,15 +24,18 @@ public class ObjectUtility<Item> {
         object.ifPresent(consumer);
     }
 
-    public Optional<Item> filter(Predicate<? super Item> predicate) {
-        return object.filter(predicate);
+    @SuppressWarnings("unchecked")
+    public <T extends ObjectUtility<Item>> T filter(Predicate<? super Item> predicate) {
+        object = object.filter(predicate);
+        return (T) this;
     }
     
-    public<U> Optional<U> map(Function<? super Item, ? extends U> mapper) {
-        return object.map(mapper);
+    @SuppressWarnings("unchecked")
+    public <U> ObjectUtility<U> map(Function<? super Item, ? extends U> mapper) {
+        return $(this.object.map(mapper).orElse(null));
     }
 
-    public<U> Item get() {
+    public Item get() {
         return object.get();
     }
     
