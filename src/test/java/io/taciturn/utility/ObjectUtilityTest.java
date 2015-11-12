@@ -8,12 +8,6 @@ import static org.junit.Assert.assertThat;
 import static io.taciturn.Utility.$;
 
 public class ObjectUtilityTest {
-    
-    @Test
-    public void test() {
-        $(" ").toArray().orElse(null);
-        $(" ", " ", "").toArray(String.class).orElse(null);
-    }
 
     @Test
     public void thisObjectGet() {

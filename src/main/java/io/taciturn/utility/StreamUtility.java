@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static io.taciturn.Utility.$;
@@ -60,6 +61,10 @@ public class StreamUtility<Container extends Stream<Item>, Item> extends ObjectU
 
     public CollectionUtility<Vector<Item>, Item> toVector() {
         return to(new Vector<>());
+    }
+
+    public void forEach(Consumer<? super Item> action) {
+        ifPresent(o -> o.forEach(action));
     }
 
 }
