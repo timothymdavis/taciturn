@@ -3,20 +3,22 @@ package io.taciturn;
 import java.util.Collection;
 
 import io.taciturn.utility.ArrayUtility;
+import io.taciturn.utility.BooleanUtility;
+import io.taciturn.utility.ByteUtility;
+import io.taciturn.utility.CharacterUtility;
 import io.taciturn.utility.CollectionUtility;
-import io.taciturn.utility.ComparableUtility;
+import io.taciturn.utility.DoubleUtility;
+import io.taciturn.utility.FloatUtility;
+import io.taciturn.utility.IntegerUtility;
+import io.taciturn.utility.LongUtility;
 import io.taciturn.utility.NonIterableUtility;
+import io.taciturn.utility.ShortUtility;
 import io.taciturn.utility.StringUtility;
 
 public class Utility {
 
     public static <Item> NonIterableUtility<Item> $(Item object) {
         return new NonIterableUtility<>(object);
-    }
-
-    @SafeVarargs
-    public static <Item> ArrayUtility<Item> $(Item first, Item... rest) {
-        return new ArrayUtility<>(first, rest);
     }
 
     public static <Item> ArrayUtility<Item> $(Item[] object) {
@@ -27,40 +29,45 @@ public class Utility {
         return new CollectionUtility<>(object);
     }
 
-    public static ComparableUtility<Boolean> $(Boolean object) {
-        return new ComparableUtility<>(object);
+    public static BooleanUtility $(Boolean object) {
+        return new BooleanUtility(object);
     }
 
-    public static ComparableUtility<Character> $(Character object) {
-        return new ComparableUtility<>(object);
+    public static CharacterUtility $(Character object) {
+        return new CharacterUtility(object);
     }
 
-    public static ComparableUtility<Byte> $(Byte object) {
-        return new ComparableUtility<>(object);
+    public static ByteUtility $(Byte object) {
+        return new ByteUtility(object);
     }
 
-    public static ComparableUtility<Double> $(Double object) {
-        return new ComparableUtility<>(object);
+    public static DoubleUtility $(Double object) {
+        return new DoubleUtility(object);
     }
 
-    public static ComparableUtility<Float> $(Float object) {
-        return new ComparableUtility<>(object);
+    public static FloatUtility $(Float object) {
+        return new FloatUtility(object);
     }
 
-    public static ComparableUtility<Integer> $(Integer object) {
-        return new ComparableUtility<>(object);
+    public static IntegerUtility $(Integer object) {
+        return new IntegerUtility(object);
     }
 
-    public static ComparableUtility<Long> $(Long object) {
-        return new ComparableUtility<>(object);
+    public static LongUtility $(Long object) {
+        return new LongUtility(object);
     }
 
-    public static ComparableUtility<Short> $(Short object) {
-        return new ComparableUtility<>(object);
+    public static ShortUtility $(Short object) {
+        return new ShortUtility(object);
     }
 
     public static StringUtility $(String object) {
         return new StringUtility(object);
+    }
+
+    @SafeVarargs
+    public static <Item> ArrayUtility<Item> $(Item first, Item... rest) {
+        return new ArrayUtility<>(first, rest);
     }
 
 }
