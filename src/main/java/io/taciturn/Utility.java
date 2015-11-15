@@ -1,6 +1,7 @@
 package io.taciturn;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import io.taciturn.utility.ArrayUtility;
 import io.taciturn.utility.BooleanUtility;
@@ -12,6 +13,7 @@ import io.taciturn.utility.FloatUtility;
 import io.taciturn.utility.IntegerUtility;
 import io.taciturn.utility.LongUtility;
 import io.taciturn.utility.NonIterableUtility;
+import io.taciturn.utility.ObjectUtility;
 import io.taciturn.utility.ShortUtility;
 import io.taciturn.utility.StringUtility;
 
@@ -68,6 +70,10 @@ public class Utility {
     @SafeVarargs
     public static <Item> ArrayUtility<Item> $(Item first, Item... rest) {
         return new ArrayUtility<>(first, rest);
+    }
+
+    public <Item> ObjectUtility<Item> $(Optional<Item> object) {
+        return $(object.orElse(null));
     }
 
 }
