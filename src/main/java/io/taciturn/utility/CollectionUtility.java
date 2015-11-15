@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class CollectionUtility<Container extends Collection<Item>, Item> extends ObjectUtility<Container> {
@@ -55,6 +54,15 @@ public class CollectionUtility<Container extends Collection<Item>, Item> extends
 
     public CollectionUtility<ArrayDeque<Item>, Item> toArrayDeque() {
         return streamUtility.toArrayDeque();
+    }
+
+    public StreamUtility<Stream<Item>, Item> toStream() {
+        return streamUtility;
+    }
+
+    @SuppressWarnings("unchecked")
+    public CollectionUtility<Collection<Item>, Item> asCollection() {
+        return (CollectionUtility<Collection<Item>, Item>) this;
     }
 
 }

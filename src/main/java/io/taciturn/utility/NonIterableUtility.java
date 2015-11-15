@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
+import java.util.stream.Stream;
 
 import static io.taciturn.Utility.$;
 
@@ -62,6 +63,10 @@ public class NonIterableUtility<Item> extends ObjectUtility<Item> {
 
     public CollectionUtility<Vector<Item>, Item> toVector() {
         return to(new Vector<>());
+    }
+
+    public StreamUtility<Stream<Item>, Item> toStream() {
+        return new StreamUtility<>(toArrayList().map(ArrayList::stream).orElse(null));
     }
     
 }
