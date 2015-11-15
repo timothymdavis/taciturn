@@ -4,6 +4,8 @@ import static io.taciturn.Utility.$;
 
 public class DoubleUtility extends ComparableUtility<Double> {
 
+    public static final double DEFAULT_VALUE = 0.0D;
+
     public DoubleUtility(Double object) {
         super(object);
     }
@@ -15,6 +17,14 @@ public class DoubleUtility extends ComparableUtility<Double> {
 
     public StringUtility convertToString() {
         return $(toString());
+    }
+
+    public double asPrimitive() {
+        return asPrimitive(DEFAULT_VALUE);
+    }
+
+    public double asPrimitive(double defaultValue) {
+        return map(o -> o).orElse(defaultValue);
     }
 
 }

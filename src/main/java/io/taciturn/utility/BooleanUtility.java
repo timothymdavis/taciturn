@@ -4,6 +4,8 @@ import static io.taciturn.Utility.$;
 
 public class BooleanUtility extends ComparableUtility<Boolean> {
 
+    public static final boolean DEFAULT_VALUE = false;
+
     public BooleanUtility(Boolean object) {
         super(object);
     }
@@ -15,6 +17,14 @@ public class BooleanUtility extends ComparableUtility<Boolean> {
 
     public StringUtility convertToString() {
         return $(toString());
+    }
+
+    public boolean asPrimitive() {
+        return asPrimitive(DEFAULT_VALUE);
+    }
+
+    public boolean asPrimitive(boolean defaultValue) {
+        return map(o -> o).orElse(defaultValue);
     }
 
 }

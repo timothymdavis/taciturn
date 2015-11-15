@@ -4,6 +4,8 @@ import static io.taciturn.Utility.$;
 
 public class IntegerUtility extends ComparableUtility<Integer> {
 
+    public static final int DEFAULT_VALUE = 0;
+
     public IntegerUtility(Integer object) {
         super(object);
     }
@@ -19,6 +21,14 @@ public class IntegerUtility extends ComparableUtility<Integer> {
 
     public StringUtility convertToString(int radix) {
         return $(map(o -> Integer.toString(o, radix)).orElse(null));
+    }
+
+    public int asPrimitive() {
+        return asPrimitive(DEFAULT_VALUE);
+    }
+    
+    public int asPrimitive(int defaultValue) {
+        return map(o -> o).orElse(defaultValue);
     }
 
 }
