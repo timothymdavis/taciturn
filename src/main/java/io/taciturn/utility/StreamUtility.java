@@ -63,8 +63,4 @@ public class StreamUtility<Container extends Stream<Item>, Item> extends ObjectU
         return to(new Vector<>());
     }
 
-    public void forEach(Consumer<? super Item> action) {
-        ifPresent(o -> o.forEach(action));
-    }
-
 }

@@ -57,8 +57,4 @@ public class CollectionUtility<Container extends Collection<Item>, Item> extends
         return streamUtility.toArrayDeque();
     }
 
-    public void forEach(Consumer<? super Item> action) {
-        streamUtility.forEach(action);
-    }
-
 }

@@ -66,10 +66,6 @@ public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
         return streamUtility.toArrayDeque();
     }
 
-    public void forEach(Consumer<? super Item> action) {
-        streamUtility.forEach(action);
-    }
-
     @SuppressWarnings("unchecked")
     @SafeVarargs
     private static <Item> Item[] toArray(Item first, Item... rest) {
