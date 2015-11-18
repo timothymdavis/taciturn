@@ -1,6 +1,7 @@
 package io.taciturn.utility;
 
 import java.util.HashSet;
+import java.util.stream.Stream;
 
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Test;
@@ -27,17 +28,33 @@ public class ArrayUtilityTest {
         assertThat($((String[]) null).toHashSet().isPresent(), is(false));
         assertThat($(new String[] { "Value" }).toHashSet().get(), IsInstanceOf.instanceOf(HashSet.class));
         assertThat($(new String[] { "Value" }).toHashSet().map(HashSet::size).get(), is(1));
+
+
+        $("one", "two", "three").toStream().orElse(Stream.empty())
+                                .map(String::toUpperCase)
+                                .forEach(System.out::println);
     }
-    
-    
-    
-    
-    
+
+
+
+
+
 @Test
-public void workingWithComparable() {
+public void workingWithArrays() {
+    
+    
+    
+    
 
 
-    System.out.println($(0.5).isBetween(0.4, .45));
+
+    $("one", "two", "three").toStream().orElse(Stream.empty())
+                            .map(String::toUpperCase)
+                            .forEach(System.out::println);
+
+
+
+
 
 
 }

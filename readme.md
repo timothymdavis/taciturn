@@ -22,12 +22,19 @@ from a raw array, which are then printed out to the console.
 
 ![alt text](https://github.com/timothymdavis/taciturn/raw/master/site/image/hello-world.gif "Hello World")
 
-## Working With `Comparable`
+## Working With `Comparable` Objects
 
 I'll create a better gif later that uses the less-than and greater-than methods, but I think that you will
 get the gist from below.
 
 ![alt text](https://github.com/timothymdavis/taciturn/raw/master/site/image/working-with-comparable.gif "Working with Comparable")
+
+## Working With `Array` Objects
+
+You can create either create an array beforehand and pass it into Taciturn, or you can create it on the
+fly as shown below.
+
+![alt text](https://github.com/timothymdavis/taciturn/raw/master/site/image/working-with-arrays.gif "Working with Arrays")
 
 ## More to Come
 
