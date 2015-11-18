@@ -2,6 +2,7 @@ package io.taciturn;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import io.taciturn.utility.ArrayUtility;
 import io.taciturn.utility.BooleanUtility;
@@ -15,6 +16,7 @@ import io.taciturn.utility.LongUtility;
 import io.taciturn.utility.NonIterableUtility;
 import io.taciturn.utility.ObjectUtility;
 import io.taciturn.utility.ShortUtility;
+import io.taciturn.utility.StreamUtility;
 import io.taciturn.utility.StringUtility;
 
 public class Utility {
@@ -61,6 +63,10 @@ public class Utility {
 
     public static ShortUtility $(Short object) {
         return new ShortUtility(object);
+    }
+
+    public static <Item> StreamUtility<Stream<Item>, Item> $(Stream<Item> object) {
+        return new StreamUtility<>(object);
     }
 
     public static StringUtility $(String object) {
