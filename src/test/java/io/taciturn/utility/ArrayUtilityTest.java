@@ -28,5 +28,18 @@ public class ArrayUtilityTest {
         assertThat($(new String[] { "Value" }).toHashSet().get(), IsInstanceOf.instanceOf(HashSet.class));
         assertThat($(new String[] { "Value" }).toHashSet().map(HashSet::size).get(), is(1));
     }
+    
+    
+    
+    
+    
+@Test
+public void workingWithComparable() {
+
+
+    System.out.println($(0.5).isBetween(0.4, .45));
+
+
+}
 
 }
