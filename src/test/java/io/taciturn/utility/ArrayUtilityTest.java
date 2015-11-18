@@ -28,35 +28,6 @@ public class ArrayUtilityTest {
         assertThat($((String[]) null).toHashSet().isPresent(), is(false));
         assertThat($(new String[] { "Value" }).toHashSet().get(), IsInstanceOf.instanceOf(HashSet.class));
         assertThat($(new String[] { "Value" }).toHashSet().map(HashSet::size).get(), is(1));
-
-
-        $("one", "two", "three").toStream().orElse(Stream.empty())
-                                .map(String::toUpperCase)
-                                .forEach(System.out::println);
     }
-
-
-
-
-
-@Test
-public void workingWithArrays() {
-    
-    
-    
-    
-
-
-
-    $("one", "two", "three").toStream().orElse(Stream.empty())
-                            .map(String::toUpperCase)
-                            .forEach(System.out::println);
-
-
-
-
-
-
-}
 
 }
