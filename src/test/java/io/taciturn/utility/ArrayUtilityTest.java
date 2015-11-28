@@ -1,7 +1,6 @@
 package io.taciturn.utility;
 
 import java.util.HashSet;
-import java.util.stream.Stream;
 
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Test;

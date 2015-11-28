@@ -10,13 +10,6 @@ import static io.taciturn.Utility.$;
 public class ObjectUtilityTest {
     
     @Test
-    public void test() {
-        $(" ").notBlank().toArray().ifPresent(System.out::println);
-        $(5.4).between(4D, 6D).ifPresent(System.out::println);
-        $(2).mustBeBetween(1, 5);
-    }
-
-    @Test
     public void thisObjectGet() {
         assertThat($("Value").optional().get(), is("Value"));
         assertThat($("Value").optional().get(), not("Other"));

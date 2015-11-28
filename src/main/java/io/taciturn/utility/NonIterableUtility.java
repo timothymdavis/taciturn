@@ -54,7 +54,7 @@ public class NonIterableUtility<Item> extends ObjectUtility<Item> {
     @SuppressWarnings("unchecked")
     public <Container extends Collection<Item>> CollectionUtility<Container, Item> to(Container collection) {
         map($(collection).mustNotBeNull()::add);
-        return (CollectionUtility<Container, Item>) $(collection);
+        return (CollectionUtility<Container, Item>) $(collection).filter(o -> !o.isEmpty());
     }
 
     public CollectionUtility<PriorityQueue<Item>, Item> toPriorityQueue() {
