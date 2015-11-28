@@ -28,7 +28,7 @@ public class IntegerUtility extends ComparableUtility<Integer> {
     }
     
     public int asPrimitive(int defaultValue) {
-        return map(o -> o).orElse(defaultValue);
+        return orElse(defaultValue);
     }
 
 }
