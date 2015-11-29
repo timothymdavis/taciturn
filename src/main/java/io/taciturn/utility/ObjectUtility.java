@@ -10,6 +10,8 @@ import static io.taciturn.Utility.$;
 
 public class ObjectUtility<Item> {
 
+    public final Predicate<Item> isNullPredicate = o -> o == null;
+
     private Optional<Item> object;
 
     public ObjectUtility(Item object) {
@@ -64,7 +66,7 @@ public class ObjectUtility<Item> {
     }
 
     public Item mustNotBeNull() {
-        return mustNotBe(isNullPredicate(), createExpectedMessage("non-null"));
+        return mustNotBe(isNullPredicate, createExpectedMessage("non-null"));
     }
 
     public Optional<Item> optional() {
@@ -73,10 +75,6 @@ public class ObjectUtility<Item> {
 
     protected String createExpectedMessage(Object expected) {
         return String.format("Expected: %s\n  actual: %s\n", expected, object);
-    }
-
-    public static <T> Predicate<T> isNullPredicate() {
-        return o -> o == null;
     }
 
 }

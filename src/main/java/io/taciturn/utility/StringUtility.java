@@ -7,44 +7,64 @@ import static io.taciturn.Utility.$;
 
 public class StringUtility extends ComparableUtility<String> {
 
+    public static final Predicate<String> isEmptyPredicate = String::isEmpty;
+    public static final Predicate<String> isBlankPredicate = o -> o.trim().isEmpty();
+
     public StringUtility(String object) {
         super(object);
     }
 
-    public boolean isBlank() {
-        return blank().isPresent();
-    }
-    
-    public boolean isEmpty() {
-        return empty().isPresent();
-    }
-
-    public boolean isNotBlank() {
-        return notBlank().isPresent();
-    }
-
-    public boolean isNotEmpty() {
-        return notEmpty().isPresent();
-    }
-
     public StringUtility blank() {
-        return filter(isBlankPredicate());
-    }
-
-    public StringUtility empty() {
-        return filter(isEmptyPredicate());
-    }
-
-    public StringUtility notBlank() {
-        return filter(isBlankPredicate().negate());
-    }
-
-    public StringUtility notEmpty() {
-        return filter(isEmptyPredicate().negate());
+        return filter(isBlankPredicate);
     }
 
     public BooleanUtility convertToBoolean() {
         return $(map(Boolean::parseBoolean).orElse(null));
+    }
+
+    public DoubleUtility convertToDouble() {
+        return convertToNumber(this::mustConvertToDouble, () -> new DoubleUtility(null));
+    }
+
+    public FloatUtility convertToFloat() {
+        return convertToNumber(this::mustConvertToFloat, () -> new FloatUtility(null));
+    }
+
+    public IntegerUtility convertToInteger() {
+        return convertToNumber(this::mustConvertToInteger, () -> new IntegerUtility(null));
+    }
+
+    public IntegerUtility convertToInteger(int radix) {
+        return convertToNumber(() -> mustConvertToInteger(radix), () -> new IntegerUtility(null));
+    }
+
+    public LongUtility convertToLong() {
+        return convertToNumber(this::mustConvertToLong, () -> new LongUtility(null));
+    }
+
+    public LongUtility convertToLong(int radix) {
+        return convertToNumber(() -> mustConvertToLong(radix), () -> new LongUtility(null));
+    }
+
+    public ShortUtility convertToShort() {
+        return convertToNumber(this::mustConvertToShort, () -> new ShortUtility(null));
+    }
+
+    public ShortUtility convertToShort(int radix) {
+        return convertToNumber(() -> mustConvertToShort(radix), () -> new ShortUtility(null));
+    }
+
+    private <T extends ComparableUtility<? extends Number>> T convertToNumber(
+            Supplier<T> utility,
+            Supplier<T> defaultValueSupplier) {
+        $(utility).mustNotBeNull();
+        $(defaultValueSupplier).mustNotBeNull();
+        try {
+            return utility.get();
+        }
+        catch (NumberFormatException e) {
+            return defaultValueSupplier.get();
+        }
     }
 
     public DoubleUtility mustConvertToDouble() {
@@ -53,43 +73,6 @@ public class StringUtility extends ComparableUtility<String> {
 
     public FloatUtility mustConvertToFloat() {
         return $(map(Float::parseFloat).orElse(null));
-    }
-
-    private <T extends ComparableUtility<? extends Number>> T convertToNumber(
-            T utility,
-            Supplier<T> defaultValueSupplier) {
-        $(utility).mustNotBeNull();
-        $(defaultValueSupplier).mustNotBeNull();
-        try {
-            return utility;
-        }
-        catch (NumberFormatException e) {
-            return defaultValueSupplier.get();
-        }
-    }
-
-    public IntegerUtility convertToInteger() {
-        return convertToNumber(mustConvertToInteger(), () -> new IntegerUtility(null));
-    }
-
-    public IntegerUtility convertToInteger(int radix) {
-        return convertToNumber(mustConvertToInteger(radix), () -> new IntegerUtility(null));
-    }
-
-    public LongUtility convertToLong() {
-        return convertToNumber(mustConvertToLong(), () -> new LongUtility(null));
-    }
-
-    public LongUtility convertToLong(int radix) {
-        return convertToNumber(mustConvertToLong(radix), () -> new LongUtility(null));
-    }
-
-    public ShortUtility convertToShort() {
-        return convertToNumber(mustConvertToShort(), () -> new ShortUtility(null));
-    }
-
-    public ShortUtility convertToShort(int radix) {
-        return convertToNumber(mustConvertToShort(radix), () -> new ShortUtility(null));
     }
 
     public IntegerUtility mustConvertToInteger() {
@@ -116,12 +99,31 @@ public class StringUtility extends ComparableUtility<String> {
         return $(map(o -> Short.parseShort(o, radix)).orElse(null));
     }
 
-    public Predicate<String> isEmptyPredicate() {
-        return String::isEmpty;
+    public StringUtility empty() {
+        return filter(isEmptyPredicate);
     }
 
-    public Predicate<String> isBlankPredicate() {
-        return o -> o.trim().isEmpty();
+    public boolean isBlank() {
+        return blank().isPresent();
+    }
+    
+    public boolean isEmpty() {
+        return empty().isPresent();
     }
 
+    public boolean isNotBlank() {
+        return notBlank().isPresent();
+    }
+
+    public boolean isNotEmpty() {
+        return notEmpty().isPresent();
+    }
+
+    public StringUtility notBlank() {
+        return filter(isBlankPredicate.negate());
+    }
+
+    public StringUtility notEmpty() {
+        return filter(isEmptyPredicate.negate());
+    }
 }
