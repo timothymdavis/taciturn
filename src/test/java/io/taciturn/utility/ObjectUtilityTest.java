@@ -31,9 +31,9 @@ public class ObjectUtilityTest {
     }
 
     @Test
-    public void thisObjectMustBeNull() {
+    public void thisObjectMustNotBeNull() {
         Object object = new Object();
-        assertThat($(object).mustNotBeNull(), is(object));
+        $(object).mustNotBeNull();
     }
 
 }

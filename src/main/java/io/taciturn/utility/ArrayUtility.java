@@ -80,7 +80,7 @@ public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
                                     .orElse(false),
                         "The type of the first item must match the rest.");
         CollectionUtility<ArrayList<Item>, Item> items = new NonIterableUtility<>(first).toArrayList();
-        items.map(o -> o.addAll(Arrays.stream($(rest).mustNotBeNull()).collect(Collectors.toList())));
+        items.map(o -> o.addAll(Arrays.stream(rest).collect(Collectors.toList())));
         return $(items.orElse(null)).toArray((Class<? extends Item>) first.getClass()).orElse(null);
     }
 

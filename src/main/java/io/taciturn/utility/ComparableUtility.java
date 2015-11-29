@@ -59,52 +59,59 @@ public class ComparableUtility<Item extends Comparable<Item>>
         return filter(isEqualToPredicate(item));
     }
 
-    public Item mustBeBetween(Item lower, Item upper) {
+    public ComparableUtility<Item> mustBeBetween(Item lower, Item upper) {
         return mustBe(isBetweenPredicate(lower, upper), createBetweenExpectedMessage(lower, upper));
     }
 
-    public Item mustBeGreaterThan(Item lower) {
+    public ComparableUtility<Item> mustBeGreaterThan(Item lower) {
         return mustBe(isGreaterThanPredicate(lower), createGreaterThanExpectedMessage(lower));
     }
 
-    public Item mustBeGreaterThanOrEqualTo(Item lower) {
+    public ComparableUtility<Item> mustBeGreaterThanOrEqualTo(Item lower) {
         return mustBe(isGreaterThanOrEqualToPredicate(lower), createGreaterThanOrEqualToExpectedMessage(lower));
     }
 
-    public Item mustBeLessThan(Item upper) {
+    public ComparableUtility<Item> mustBeLessThan(Item upper) {
         return mustBe(isLessThanPredicate(upper), createLessThanExpectedMessage(upper));
     }
 
-    public Item mustBeLessThanOrEqualTo(Item upper) {
+    public ComparableUtility<Item> mustBeLessThanOrEqualTo(Item upper) {
         return mustBe(isLessThanOrEqualToPredicate(upper), createLessThanOrEqualToExpectedMessage(upper));
     }
 
-    public Item mustBeEqualTo(Item upper) {
+    public ComparableUtility<Item> mustBeEqualTo(Item upper) {
         return mustBe(isEqualToPredicate(upper), createEqualToExpectedMessage(upper));
     }
 
     public static <T extends Comparable<T>> Predicate<T> isBetweenPredicate(T lower, T upper) {
-        return o -> $(lower).mustNotBeNull().compareTo(o) <= 0 && $(upper).mustNotBeNull().compareTo(o) >= 0;
+        $(lower).mustNotBeNull();
+        $(upper).mustNotBeNull();
+        return o -> lower.compareTo(o) <= 0 && upper.compareTo(o) >= 0;
     }
 
     public static <T extends Comparable<T>> Predicate<T> isGreaterThanPredicate(T lower) {
-        return o -> $(lower).mustNotBeNull().compareTo(o) < 0;
+        $(lower).mustNotBeNull();
+        return o -> lower.compareTo(o) < 0;
     }
 
     public static <T extends Comparable<T>> Predicate<T> isGreaterThanOrEqualToPredicate(T lower) {
-        return o -> $(lower).mustNotBeNull().compareTo(o) <= 0;
+        $(lower).mustNotBeNull();
+        return o -> lower.compareTo(o) <= 0;
     }
 
     public static <T extends Comparable<T>> Predicate<T> isLessThanPredicate(T upper) {
-        return o -> $(upper).mustNotBeNull().compareTo(o) > 0;
+        $(upper).mustNotBeNull();
+        return o -> upper.compareTo(o) > 0;
     }
 
     public static <T extends Comparable<T>> Predicate<T> isLessThanOrEqualToPredicate(T upper) {
-        return o -> $(upper).mustNotBeNull().compareTo(o) >= 0;
+        $(upper).mustNotBeNull();
+        return o -> upper.compareTo(o) >= 0;
     }
 
     public static <T extends Comparable<T>> Predicate<T> isEqualToPredicate(T item) {
-        return o -> $(item).mustNotBeNull().compareTo(o) == 0;
+        $(item).mustNotBeNull();
+        return o -> item.compareTo(o) == 0;
     }
 
     private String createBetweenExpectedMessage(Item lower, Item upper) {

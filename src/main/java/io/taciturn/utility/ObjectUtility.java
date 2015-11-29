@@ -53,19 +53,27 @@ public class ObjectUtility<Item> {
         return object.orElseThrow(exceptionSupplier);
     }
 
-    public Item mustBe(Predicate<Item> predicate) {
-        return object.filter(predicate).orElseThrow(InvalidContractException::new);
+    public <T extends ObjectUtility<Item>> T mustBe(Predicate<? super Item> predicate) {
+        T filtered = filter(predicate);
+        filtered.orElseThrow(InvalidContractException::new);
+        return filtered;
     }
 
-    public Item mustBe(Predicate<Item> predicate, String message) {
-        return object.filter(predicate).orElseThrow(() -> new InvalidContractException(message));
+    public <T extends ObjectUtility<Item>> T mustBe(Predicate<? super Item> predicate, String message) {
+        T filtered = filter(predicate);
+        filtered.orElseThrow(() -> new InvalidContractException(message));
+        return filtered;
     }
 
-    public Item mustNotBe(Predicate<Item> predicate, String message) {
+    public <T extends ObjectUtility<Item>> T mustNotBe(Predicate<? super Item> predicate) {
+        return mustBe(predicate.negate());
+    }
+
+    public <T extends ObjectUtility<Item>> T mustNotBe(Predicate<? super Item> predicate, String message) {
         return mustBe(predicate.negate(), message);
     }
 
-    public Item mustNotBeNull() {
+    public <T extends ObjectUtility<Item>> T mustNotBeNull() {
         return mustNotBe(isNullPredicate, createExpectedMessage("non-null"));
     }
 

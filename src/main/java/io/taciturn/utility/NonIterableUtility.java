@@ -22,7 +22,7 @@ public class NonIterableUtility<Item> extends ObjectUtility<Item> {
 
     @SuppressWarnings({ "unchecked", "ConstantConditions" })
     public ArrayUtility<Item> toArray() {
-        Item[] array = isPresent() ? (Item[]) Array.newInstance(mustNotBeNull().getClass(), 1) : null;
+        Item[] array = isPresent() ? (Item[]) Array.newInstance(get().getClass(), 1) : null;
         map(o -> array[0] = o);
         return $(array);
     }
@@ -53,7 +53,8 @@ public class NonIterableUtility<Item> extends ObjectUtility<Item> {
 
     @SuppressWarnings("unchecked")
     public <Container extends Collection<Item>> CollectionUtility<Container, Item> to(Container collection) {
-        map($(collection).mustNotBeNull()::add);
+        $(collection).mustNotBeNull();
+        map(collection::add);
         return (CollectionUtility<Container, Item>) $(collection).filter(o -> !o.isEmpty());
     }
 
