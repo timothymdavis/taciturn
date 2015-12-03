@@ -4,20 +4,38 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.Spliterator;
 import java.util.Vector;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import static io.taciturn.Utility.$;
 
 public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
 
-    private final StreamUtility<Stream<Item>, Item> streamUtility;
+    private final StreamUtility<Item> streamUtility;
 
     public ArrayUtility(Item[] o) {
         super(o);
@@ -65,7 +83,7 @@ public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
         return streamUtility.toArrayDeque();
     }
 
-    public StreamUtility<Stream<Item>, Item> toStream() {
+    public StreamUtility<Item> toStream() {
         return streamUtility;
     }
 
@@ -76,7 +94,7 @@ public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
         $(rest).mustNotBeNull();
         $(first).mustBe(o -> $(rest).toList()
                                     .map(Collection::stream)
-                                    .map(c -> c.allMatch(i -> i.getClass() == o.getClass()))
+                                    .map(c -> c.allMatch(i -> i != null && i.getClass() == o.getClass()))
                                     .orElse(false),
                         "The type of the first item must match the rest.");
         CollectionUtility<ArrayList<Item>, Item> items = new NonIterableUtility<>(first).toArrayList();
@@ -84,4 +102,163 @@ public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
         return $(items.orElse(null)).toArray((Class<? extends Item>) first.getClass()).orElse(null);
     }
 
+    public boolean allMatch(Predicate<? super Item> predicate) {
+        return streamUtility.allMatch(predicate);
+    }
+
+    public ObjectUtility<Item> min(Comparator<? super Item> comparator) {
+        return streamUtility.min(comparator);
+    }
+
+    public <R, A> ObjectUtility<R> collect(Collector<? super Item, A, R> collector) {
+        return streamUtility.collect(collector);
+    }
+
+    public long count() {
+        return streamUtility.count();
+    }
+
+    public boolean noneMatch(Predicate<? super Item> predicate) {
+        return streamUtility.noneMatch(predicate);
+    }
+
+    public boolean anyMatch(Predicate<? super Item> predicate) {
+        return streamUtility.anyMatch(predicate);
+    }
+
+    public ObjectUtility<Item> findAny() {
+        return streamUtility.findAny();
+    }
+
+    public <R> StreamUtility<R> mapItems(Function<? super Item, ? extends R> mapper) {
+        return streamUtility.mapItems(mapper);
+    }
+
+    public void forEach(Consumer<? super Item> action) {
+        streamUtility.forEach(action);
+    }
+
+    public StreamUtility<Item> sequential() {
+        return streamUtility.sequential();
+    }
+
+    public <U> ObjectUtility<U> reduce(U identity,
+                                       BiFunction<U, ? super Item, U> accumulator,
+                                       BinaryOperator<U> combiner) {
+        return streamUtility.reduce(identity, accumulator, combiner);
+    }
+
+    public ObjectUtility<Item> reduce(Item identity, BinaryOperator<Item> accumulator) {
+        return streamUtility.reduce(identity, accumulator);
+    }
+
+    public StreamUtility<Item> filterItems(Predicate<? super Item> predicate) {
+        return streamUtility.filterItems(predicate);
+    }
+
+    public ObjectUtility<DoubleStream> mapToDouble(ToDoubleFunction<? super Item> mapper) {
+        return streamUtility.mapToDouble(mapper);
+    }
+
+    public ObjectUtility<IntStream> mapToInt(ToIntFunction<? super Item> mapper) {
+        return streamUtility.mapToInt(mapper);
+    }
+
+    public ObjectUtility<Spliterator<Item>> spliterator() {
+        return streamUtility.spliterator();
+    }
+
+    public StreamUtility<Item> distinct() {
+        return streamUtility.distinct();
+    }
+
+    public ObjectUtility<LongStream> mapToLong(ToLongFunction<? super Item> mapper) {
+        return streamUtility.mapToLong(mapper);
+    }
+
+    public <R> ObjectUtility<R> collect(Supplier<R> supplier,
+                                        BiConsumer<R, ? super Item> accumulator,
+                                        BiConsumer<R, R> combiner) {
+        return streamUtility.collect(supplier, accumulator, combiner);
+    }
+
+    public StreamUtility<Item> sorted(Comparator<? super Item> comparator) {
+        return streamUtility.sorted(comparator);
+    }
+
+    public StreamUtility<Item> onClose(Runnable closeHandler) {
+        return streamUtility.onClose(closeHandler);
+    }
+
+    public StreamUtility<Item> skip(long n) {
+        return streamUtility.skip(n);
+    }
+
+    public StreamUtility<Item> limit(long maxSize) {
+        return streamUtility.limit(maxSize);
+    }
+
+    public void close() {
+        streamUtility.close();
+    }
+
+    public ObjectUtility<LongStream> flatMapToLong(Function<? super Item, ? extends LongStream> mapper) {
+        return streamUtility.flatMapToLong(mapper);
+    }
+
+    public ObjectUtility<Item> max(Comparator<? super Item> comparator) {
+        return streamUtility.max(comparator);
+    }
+
+    public ObjectUtility<Item> reduce(BinaryOperator<Item> accumulator) {
+        return streamUtility.reduce(accumulator);
+    }
+
+    public StreamUtility<Item> parallel() {
+        return streamUtility.parallel();
+    }
+
+    public <CollectionType extends Collection<Item>> CollectionUtility<CollectionType, Item> to(CollectionType collection) {
+        return streamUtility.to(collection);
+    }
+
+    public <R> StreamUtility<R> flatMapItems(Function<? super Item, ? extends Stream<? extends R>> mapper) {
+        return streamUtility.flatMapItems(mapper);
+    }
+
+    public void forEachOrdered(Consumer<? super Item> action) {
+        streamUtility.forEachOrdered(action);
+    }
+
+    public ObjectUtility<Iterator<Item>> iterator() {
+        return streamUtility.iterator();
+    }
+
+    public StreamUtility<Item> sorted() {
+        return streamUtility.sorted();
+    }
+
+    public ObjectUtility<IntStream> flatMapToInt(Function<? super Item, ? extends IntStream> mapper) {
+        return streamUtility.flatMapToInt(mapper);
+    }
+
+    public ObjectUtility<DoubleStream> flatMapToDouble(Function<? super Item, ? extends DoubleStream> mapper) {
+        return streamUtility.flatMapToDouble(mapper);
+    }
+
+    public ObjectUtility<Item> findFirst() {
+        return streamUtility.findFirst();
+    }
+
+    public StreamUtility<Item> peek(Consumer<? super Item> action) {
+        return streamUtility.peek(action);
+    }
+
+    public boolean isParallel() {
+        return streamUtility.isParallel();
+    }
+
+    public StreamUtility<Item> unordered() {
+        return streamUtility.unordered();
+    }
 }

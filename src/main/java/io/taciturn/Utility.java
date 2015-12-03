@@ -65,7 +65,7 @@ public class Utility {
         return new ShortUtility(object);
     }
 
-    public static <Item> StreamUtility<Stream<Item>, Item> $(Stream<Item> object) {
+    public static <Item> StreamUtility<Item> $(Stream<Item> object) {
         return new StreamUtility<>(object);
     }
 

@@ -66,7 +66,7 @@ public class NonIterableUtility<Item> extends ObjectUtility<Item> {
         return to(new Vector<>());
     }
 
-    public StreamUtility<Stream<Item>, Item> toStream() {
+    public StreamUtility<Item> toStream() {
         return new StreamUtility<>(toArrayList().map(ArrayList::stream).orElse(null));
     }
     

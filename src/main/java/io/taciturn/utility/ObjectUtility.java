@@ -37,6 +37,10 @@ public class ObjectUtility<Item> {
         return $(this.object.map(mapper).orElse(null));
     }
 
+    public <U> ObjectUtility<U> flatMap(Function<? super Item, Optional<U>> mapper) {
+        return $(this.object.flatMap(mapper).orElse(null));
+    }
+
     public Item get() {
         return object.get();
     }
