@@ -33,7 +33,6 @@ import java.util.stream.Stream;
 import static io.taciturn.Utility.$;
 
 public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
-    private Stream<Item> stream;
 
     public StreamUtility(Stream<Item> object) {
         super(object);
