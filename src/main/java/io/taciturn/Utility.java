@@ -2,7 +2,6 @@ package io.taciturn;
 
 import java.util.Collection;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 import io.taciturn.utility.ArrayUtility;
@@ -21,10 +20,6 @@ import io.taciturn.utility.StreamUtility;
 import io.taciturn.utility.StringUtility;
 
 public class Utility {
-
-    public static <Item> Function<Item, ? extends ObjectUtility<Item>> $() {
-        return Utility::$;
-    }
 
     public static <Item> NonIterableUtility<Item> $(Item object) {
         return new NonIterableUtility<>(object);
