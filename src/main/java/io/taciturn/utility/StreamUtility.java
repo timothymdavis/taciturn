@@ -68,7 +68,7 @@ public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
         return $(map(Stream::distinct).orElse(null));
     }
 
-    public StreamUtility<Item> filterItems(Predicate<? super Item> predicate) {
+    public StreamUtility<Item> filterEach(Predicate<? super Item> predicate) {
         return $(map(s -> s.filter(predicate)).orElse(null));
     }
 
@@ -119,7 +119,7 @@ public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
         return $(map(s -> s.limit(maxSize)).orElse(null));
     }
 
-    public <R> StreamUtility<R> mapItems(Function<? super Item, ? extends R> mapper) {
+    public <R> StreamUtility<R> mapEach(Function<? super Item, ? extends R> mapper) {
         return $(map(s -> s.map(mapper)).orElse(null));
     }
 

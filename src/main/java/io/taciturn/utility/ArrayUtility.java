@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Spliterator;
@@ -130,8 +129,8 @@ public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
         return streamUtility.findAny();
     }
 
-    public <R> StreamUtility<R> mapItems(Function<? super Item, ? extends R> mapper) {
-        return streamUtility.mapItems(mapper);
+    public <R> StreamUtility<R> mapEach(Function<? super Item, ? extends R> mapper) {
+        return streamUtility.mapEach(mapper);
     }
 
     public void forEach(Consumer<? super Item> action) {
@@ -152,8 +151,8 @@ public class ArrayUtility<Item> extends ObjectUtility<Item[]> {
         return streamUtility.reduce(identity, accumulator);
     }
 
-    public StreamUtility<Item> filterItems(Predicate<? super Item> predicate) {
-        return streamUtility.filterItems(predicate);
+    public StreamUtility<Item> filterEach(Predicate<? super Item> predicate) {
+        return streamUtility.filterEach(predicate);
     }
 
     public ObjectUtility<DoubleStream> mapToDouble(ToDoubleFunction<? super Item> mapper) {

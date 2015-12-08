@@ -110,8 +110,8 @@ public class CollectionUtility<Container extends Collection<Item>, Item> extends
         return streamUtility.findAny();
     }
 
-    public <R> StreamUtility<R> mapItems(Function<? super Item, ? extends R> mapper) {
-        return streamUtility.mapItems(mapper);
+    public <R> StreamUtility<R> mapEach(Function<? super Item, ? extends R> mapper) {
+        return streamUtility.mapEach(mapper);
     }
 
     public void forEach(Consumer<? super Item> action) {
@@ -132,8 +132,8 @@ public class CollectionUtility<Container extends Collection<Item>, Item> extends
         return streamUtility.reduce(identity, accumulator);
     }
 
-    public StreamUtility<Item> filterItems(Predicate<? super Item> predicate) {
-        return streamUtility.filterItems(predicate);
+    public StreamUtility<Item> filterEach(Predicate<? super Item> predicate) {
+        return streamUtility.filterEach(predicate);
     }
 
     public ObjectUtility<DoubleStream> mapToDouble(ToDoubleFunction<? super Item> mapper) {
