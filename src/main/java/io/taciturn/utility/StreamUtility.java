@@ -32,7 +32,7 @@ import java.util.stream.Stream;
 
 import static io.taciturn.Utility.$;
 
-public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
+public class StreamUtility<Item> extends AbstractUtility<Stream<Item>> {
 
     public StreamUtility(Stream<Item> object) {
         super(object);
@@ -50,13 +50,13 @@ public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
         ifPresent(BaseStream::close);
     }
 
-    public <R, A> ObjectUtility<R> collect(Collector<? super Item, A, R> collector) {
+    public <R, A> AbstractUtility<R> collect(Collector<? super Item, A, R> collector) {
         return map(s -> s.collect(collector));
     }
 
-    public <R> ObjectUtility<R> collect(Supplier<R> supplier,
-                         BiConsumer<R, ? super Item> accumulator,
-                         BiConsumer<R, R> combiner) {
+    public <R> AbstractUtility<R> collect(Supplier<R> supplier,
+                                          BiConsumer<R, ? super Item> accumulator,
+                                          BiConsumer<R, R> combiner) {
         return map(s -> s.collect(supplier, accumulator, combiner));
     }
 
@@ -72,11 +72,11 @@ public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
         return $(map(s -> s.filter(predicate)).orElse(null));
     }
 
-    public ObjectUtility<Item> findAny() {
+    public AbstractUtility<Item> findAny() {
         return flatMap(Stream::findAny);
     }
 
-    public ObjectUtility<Item> findFirst() {
+    public AbstractUtility<Item> findFirst() {
         return flatMap(Stream::findFirst);
     }
 
@@ -85,17 +85,17 @@ public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
     }
 
     /* This should return a DoubleStreamUtility at some point. */
-    public ObjectUtility<DoubleStream> flatMapToDouble(Function<? super Item, ? extends DoubleStream> mapper) {
+    public AbstractUtility<DoubleStream> flatMapToDouble(Function<? super Item, ? extends DoubleStream> mapper) {
         return map(s -> s.flatMapToDouble(mapper));
     }
 
     /* This should return a IntStreamUtility at some point. */
-    public ObjectUtility<IntStream> flatMapToInt(Function<? super Item, ? extends IntStream> mapper) {
+    public AbstractUtility<IntStream> flatMapToInt(Function<? super Item, ? extends IntStream> mapper) {
         return map(s -> s.flatMapToInt(mapper));
     }
 
     /* This should return a LongStreamUtility at some point. */
-    public ObjectUtility<LongStream> flatMapToLong(Function<? super Item, ? extends LongStream> mapper) {
+    public AbstractUtility<LongStream> flatMapToLong(Function<? super Item, ? extends LongStream> mapper) {
         return map(s -> s.flatMapToLong(mapper));
     }
 
@@ -111,7 +111,7 @@ public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
         return map(BaseStream::isParallel).orElse(BooleanUtility.DEFAULT_VALUE);
     }
 
-    public ObjectUtility<Iterator<Item>> iterator() {
+    public AbstractUtility<Iterator<Item>> iterator() {
         return map(Stream::iterator);
     }
 
@@ -124,25 +124,25 @@ public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
     }
 
     /* This should return a DoubleStreamUtility at some point. */
-    public ObjectUtility<DoubleStream> mapToDouble(ToDoubleFunction<? super Item> mapper) {
+    public AbstractUtility<DoubleStream> mapToDouble(ToDoubleFunction<? super Item> mapper) {
         return map(s -> s.mapToDouble(mapper));
     }
 
     /* This should return a IntStreamUtility at some point. */
-    public ObjectUtility<IntStream> mapToInt(ToIntFunction<? super Item> mapper) {
+    public AbstractUtility<IntStream> mapToInt(ToIntFunction<? super Item> mapper) {
         return map(s -> s.mapToInt(mapper));
     }
 
     /* This should return a LongStreamUtility at some point. */
-    public ObjectUtility<LongStream> mapToLong(ToLongFunction<? super Item> mapper) {
+    public AbstractUtility<LongStream> mapToLong(ToLongFunction<? super Item> mapper) {
         return map(s -> s.mapToLong(mapper));
     }
 
-    public ObjectUtility<Item> max(Comparator<? super Item> comparator) {
+    public AbstractUtility<Item> max(Comparator<? super Item> comparator) {
         return flatMap(s -> s.max(comparator));
     }
 
-    public ObjectUtility<Item> min(Comparator<? super Item> comparator) {
+    public AbstractUtility<Item> min(Comparator<? super Item> comparator) {
         return flatMap(s -> s.min(comparator));
     }
 
@@ -162,17 +162,17 @@ public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
         return $(map(s -> s.peek(action)).orElse(null));
     }
 
-    public ObjectUtility<Item> reduce(BinaryOperator<Item> accumulator) {
+    public AbstractUtility<Item> reduce(BinaryOperator<Item> accumulator) {
         return flatMap(s -> s.reduce(accumulator));
     }
 
-    public ObjectUtility<Item> reduce(Item identity, BinaryOperator<Item> accumulator) {
+    public AbstractUtility<Item> reduce(Item identity, BinaryOperator<Item> accumulator) {
         return map(s -> s.reduce(identity, accumulator));
     }
 
-    public <U> ObjectUtility<U> reduce(U identity,
-                        BiFunction<U, ? super Item, U> accumulator,
-                        BinaryOperator<U> combiner) {
+    public <U> AbstractUtility<U> reduce(U identity,
+                                         BiFunction<U, ? super Item, U> accumulator,
+                                         BinaryOperator<U> combiner) {
         return map(s -> s.reduce(identity, accumulator, combiner));
     }
 
@@ -192,7 +192,7 @@ public class StreamUtility<Item> extends ObjectUtility<Stream<Item>> {
         return $(map(s -> s.sorted(comparator)).orElse(null));
     }
 
-    public ObjectUtility<Spliterator<Item>> spliterator() {
+    public AbstractUtility<Spliterator<Item>> spliterator() {
         return map(Stream::spliterator);
     }
 

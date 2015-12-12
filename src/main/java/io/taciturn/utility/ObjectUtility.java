@@ -1,90 +1,72 @@
 package io.taciturn.utility;
 
-import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.lang.reflect.Array;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.Vector;
 
 import static io.taciturn.Utility.$;
 
-public class ObjectUtility<Item> {
-
-    private Optional<Item> object;
+public class ObjectUtility<Item> extends AbstractUtility<Item> {
 
     public ObjectUtility(Item object) {
-        this.object = Optional.ofNullable(object);
+        super(object);
+    }
+
+    @SuppressWarnings({ "unchecked", "ConstantConditions" })
+    public ArrayUtility<Item> toArray() {
+        Item[] array = isPresent() ? (Item[]) Array.newInstance(get().getClass(), 1) : null;
+        map(o -> array[0] = o);
+        return $(array);
     }
     
-    public boolean isPresent() {
-        return object.isPresent();
+    public CollectionUtility<ArrayDeque<Item>, Item> toArrayDeque() {
+        return to(new ArrayDeque<>());
     }
-    
-    public void ifPresent(Consumer<? super Item> consumer) {
-        object.ifPresent(consumer);
+
+    public CollectionUtility<? extends Set<Item>, Item> toSet() {
+        return toHashSet();
+    }
+
+    public CollectionUtility<HashSet<Item>, Item> toHashSet() {
+        return to(new HashSet<>());
+    }
+
+    public CollectionUtility<LinkedList<Item>, Item> toLinkedList() {
+        return to(new LinkedList<>());
+    }
+
+    public CollectionUtility<? extends List<Item>, Item> toList() {
+        return toArrayList();
+    }
+
+    public CollectionUtility<ArrayList<Item>, Item> toArrayList() {
+        return to(new ArrayList<>());
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends ObjectUtility<Item>> T filter(Predicate<? super Item> predicate) {
-        object = object.filter(predicate);
-        return (T) this;
+    public <Container extends Collection<Item>> CollectionUtility<Container, Item> to(Container collection) {
+        $(collection).mustNotBeNull();
+        map(collection::add);
+        return (CollectionUtility<Container, Item>) $(collection).filter(o -> !o.isEmpty());
+    }
+
+    public CollectionUtility<PriorityQueue<Item>, Item> toPriorityQueue() {
+        return to(new PriorityQueue<>());
+    }
+
+    public CollectionUtility<Vector<Item>, Item> toVector() {
+        return to(new Vector<>());
+    }
+
+    public StreamUtility<Item> toStream() {
+        return new StreamUtility<>(toArrayList().map(ArrayList::stream).orElse(null));
     }
     
-    @SuppressWarnings("unchecked")
-    public <U> ObjectUtility<U> map(Function<? super Item, ? extends U> mapper) {
-        return $(this.object.map(mapper).orElse(null));
-    }
-
-    public <U> ObjectUtility<U> flatMap(Function<? super Item, Optional<U>> mapper) {
-        return $(this.object.flatMap(mapper).orElse(null));
-    }
-
-    public Item get() {
-        return object.get();
-    }
-    
-    public Item orElse(Item other) {
-        return object.orElse(other);
-    }
-
-    public Item orElseGet(Supplier<? extends Item> other) {
-        return object.orElseGet(other);
-    }
-
-    public <X extends Throwable> Item orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
-        return object.orElseThrow(exceptionSupplier);
-    }
-
-    public <T extends ObjectUtility<Item>> T mustBe(Predicate<? super Item> predicate) {
-        T filtered = filter(predicate);
-        filtered.orElseThrow(InvalidContractException::new);
-        return filtered;
-    }
-
-    public <T extends ObjectUtility<Item>> T mustBe(Predicate<? super Item> predicate, String message) {
-        T filtered = filter(predicate);
-        filtered.orElseThrow(() -> new InvalidContractException(message));
-        return filtered;
-    }
-
-    public <T extends ObjectUtility<Item>> T mustNotBe(Predicate<? super Item> predicate) {
-        return mustBe(predicate.negate());
-    }
-
-    public <T extends ObjectUtility<Item>> T mustNotBe(Predicate<? super Item> predicate, String message) {
-        return mustBe(predicate.negate(), message);
-    }
-
-    public <T extends ObjectUtility<Item>> T mustNotBeNull() {
-        return mustNotBe(o -> o == null, createExpectedMessage("non-null"));
-    }
-
-    public Optional<Item> optional() {
-        return object;
-    }
-
-    protected String createExpectedMessage(Object expected) {
-        return String.format("Expected: %s\n  actual: %s\n", expected, object);
-    }
-
 }

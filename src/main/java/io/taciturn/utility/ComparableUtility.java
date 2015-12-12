@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 import static io.taciturn.Utility.$;
 
 public class ComparableUtility<Item extends Comparable<Item>>
-        extends NonIterableUtility<Item> {
+        extends ObjectUtility<Item> {
 
     public ComparableUtility(Item object) {
         super(object);

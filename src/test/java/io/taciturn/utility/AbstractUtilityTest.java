@@ -7,7 +7,7 @@ import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 import static io.taciturn.Utility.$;
 
-public class ObjectUtilityTest {
+public class AbstractUtilityTest {
     
     @Test
     public void thisObjectGet() {

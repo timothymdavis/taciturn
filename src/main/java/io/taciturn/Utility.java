@@ -13,16 +13,16 @@ import io.taciturn.utility.DoubleUtility;
 import io.taciturn.utility.FloatUtility;
 import io.taciturn.utility.IntegerUtility;
 import io.taciturn.utility.LongUtility;
-import io.taciturn.utility.NonIterableUtility;
 import io.taciturn.utility.ObjectUtility;
+import io.taciturn.utility.AbstractUtility;
 import io.taciturn.utility.ShortUtility;
 import io.taciturn.utility.StreamUtility;
 import io.taciturn.utility.StringUtility;
 
 public class Utility {
 
-    public static <Item> NonIterableUtility<Item> $(Item object) {
-        return new NonIterableUtility<>(object);
+    public static <Item> ObjectUtility<Item> $(Item object) {
+        return new ObjectUtility<>(object);
     }
 
     public static <Item> ArrayUtility<Item> $(Item[] object) {
@@ -78,7 +78,7 @@ public class Utility {
         return new ArrayUtility<>(first, rest);
     }
 
-    public <Item> ObjectUtility<Item> $(Optional<Item> object) {
+    public <Item> AbstractUtility<Item> $(Optional<Item> object) {
         return $(object.orElse(null));
     }
 
