@@ -80,22 +80,22 @@ public class StreamUtility<Item> extends AbstractUtility<Stream<Item>> {
         return flatMap(Stream::findFirst);
     }
 
-    public <R> StreamUtility<R> flatMapItems(Function<? super Item, ? extends Stream<? extends R>> mapper) {
+    public <R> StreamUtility<R> flatMapEach(Function<? super Item, ? extends Stream<? extends R>> mapper) {
         return $(map(s -> s.flatMap(mapper)).orElse(null));
     }
 
     /* This should return a DoubleStreamUtility at some point. */
-    public AbstractUtility<DoubleStream> flatMapToDouble(Function<? super Item, ? extends DoubleStream> mapper) {
+    public AbstractUtility<DoubleStream> flatMapEachToDouble(Function<? super Item, ? extends DoubleStream> mapper) {
         return map(s -> s.flatMapToDouble(mapper));
     }
 
     /* This should return a IntStreamUtility at some point. */
-    public AbstractUtility<IntStream> flatMapToInt(Function<? super Item, ? extends IntStream> mapper) {
+    public AbstractUtility<IntStream> flatMapEachToInt(Function<? super Item, ? extends IntStream> mapper) {
         return map(s -> s.flatMapToInt(mapper));
     }
 
     /* This should return a LongStreamUtility at some point. */
-    public AbstractUtility<LongStream> flatMapToLong(Function<? super Item, ? extends LongStream> mapper) {
+    public AbstractUtility<LongStream> flatMapEachToLong(Function<? super Item, ? extends LongStream> mapper) {
         return map(s -> s.flatMapToLong(mapper));
     }
 

@@ -182,8 +182,8 @@ public class CollectionUtility<Container extends Collection<Item>, Item> extends
         streamUtility.close();
     }
 
-    public AbstractUtility<LongStream> flatMapToLong(Function<? super Item, ? extends LongStream> mapper) {
-        return streamUtility.flatMapToLong(mapper);
+    public AbstractUtility<LongStream> flatMapEachToLong(Function<? super Item, ? extends LongStream> mapper) {
+        return streamUtility.flatMapEachToLong(mapper);
     }
 
     public AbstractUtility<Item> max(Comparator<? super Item> comparator) {
@@ -206,8 +206,8 @@ public class CollectionUtility<Container extends Collection<Item>, Item> extends
         return streamUtility.to(collection);
     }
 
-    public <R> StreamUtility<R> flatMapItems(Function<? super Item, ? extends Stream<? extends R>> mapper) {
-        return streamUtility.flatMapItems(mapper);
+    public <R> StreamUtility<R> flatMapEach(Function<? super Item, ? extends Stream<? extends R>> mapper) {
+        return streamUtility.flatMapEach(mapper);
     }
 
     public void forEachOrdered(Consumer<? super Item> action) {
@@ -222,12 +222,12 @@ public class CollectionUtility<Container extends Collection<Item>, Item> extends
         return streamUtility.sorted();
     }
 
-    public AbstractUtility<IntStream> flatMapToInt(Function<? super Item, ? extends IntStream> mapper) {
-        return streamUtility.flatMapToInt(mapper);
+    public AbstractUtility<IntStream> flatMapEachToInt(Function<? super Item, ? extends IntStream> mapper) {
+        return streamUtility.flatMapEachToInt(mapper);
     }
 
-    public AbstractUtility<DoubleStream> flatMapToDouble(Function<? super Item, ? extends DoubleStream> mapper) {
-        return streamUtility.flatMapToDouble(mapper);
+    public AbstractUtility<DoubleStream> flatMapEachToDouble(Function<? super Item, ? extends DoubleStream> mapper) {
+        return streamUtility.flatMapEachToDouble(mapper);
     }
 
     public AbstractUtility<Item> findFirst() {
