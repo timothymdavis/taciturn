@@ -1,5 +1,6 @@
 package io.taciturn.utility;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -55,10 +56,13 @@ public abstract class AbstractUtility<Item> {
         return object.orElseThrow(exceptionSupplier);
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends AbstractUtility<Item>> T mustBe(Predicate<? super Item> predicate) {
-        T filtered = filter(predicate);
-        filtered.orElseThrow(InvalidContractException::new);
-        return filtered;
+        Objects.requireNonNull(predicate);
+        if (!predicate.test(object.orElse(null))) {
+            throw new InvalidContractException();
+        }
+        return (T) this;
     }
 
     public <T extends AbstractUtility<Item>> T mustBe(Predicate<? super Item> predicate, String message) {
@@ -75,16 +79,14 @@ public abstract class AbstractUtility<Item> {
         return mustBe(predicate.negate(), message);
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends AbstractUtility<Item>> T mustNotBeNull() {
-        return mustNotBe(o -> o == null, createExpectedMessage("non-null"));
+        Objects.requireNonNull(object.orElse(null));
+        return (T) this;
     }
 
     public Optional<Item> optional() {
         return object;
-    }
-
-    protected String createExpectedMessage(Object expected) {
-        return String.format("Expected: %s\n  actual: %s\n", expected, object);
     }
 
 }
