@@ -20,7 +20,7 @@ Once you have added the dependency, getting started with Taciturn is pretty stra
 required is `import static io.taciturn.Utility.$;`. The snippet below shows the creation of a list of strings
 from a raw array, which are then printed out to the console.
 
-![alt text](https://github.com/timothymdavis/taciturn/raw/master/site/image/hello-world.gif "Hello World")
+![alt text](site/image/hello-world.png "Hello World")
 
 ## Working With `Comparable` Objects
 
@@ -39,3 +39,20 @@ fly as shown below.
 ## More to Come
 
 ...
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+    $(function(){
+        $('img').each(function(e){
+            var src = $(this).attr('src');
+            $(this).hover(
+                    function(){
+                        $(this).attr('src', src.replace('.png', '.gif'));
+                    },
+                    function(){
+                        $(this).attr('src', src);
+                    }
+            );
+        });
+    });
+</script>
