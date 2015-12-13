@@ -63,6 +63,10 @@ public class ComparableUtility<Item extends Comparable<Item>>
         return mustBe(isBetweenPredicate(lower, upper), createBetweenExpectedMessage(lower, upper));
     }
 
+    public ComparableUtility<Item> mustBeBetween(ComparableUtility<Item> lower, ComparableUtility<Item> upper) {
+        return mustBe(isBetweenPredicate(lower, upper), createBetweenExpectedMessage(lower, upper));
+    }
+
     public ComparableUtility<Item> mustBeGreaterThan(Item lower) {
         return mustBe(isGreaterThanPredicate(lower), createGreaterThanExpectedMessage(lower));
     }
@@ -89,6 +93,10 @@ public class ComparableUtility<Item extends Comparable<Item>>
         return o -> lower.compareTo(o) <= 0 && upper.compareTo(o) >= 0;
     }
 
+    public static <T extends Comparable<T>> Predicate<T> isBetweenPredicate(ComparableUtility<T> lower, ComparableUtility<T> upper) {
+        return isBetweenPredicate(lower.orElse(null), upper.orElse(null));
+    }
+
     public static <T extends Comparable<T>> Predicate<T> isGreaterThanPredicate(T lower) {
         $(lower).mustNotBeNull();
         return o -> lower.compareTo(o) < 0;
@@ -112,6 +120,10 @@ public class ComparableUtility<Item extends Comparable<Item>>
     public static <T extends Comparable<T>> Predicate<T> isEqualToPredicate(T item) {
         $(item).mustNotBeNull();
         return o -> item.compareTo(o) == 0;
+    }
+
+    private String createBetweenExpectedMessage(ComparableUtility<Item> lower, ComparableUtility<Item> upper) {
+        return createBetweenExpectedMessage(lower.orElse(null), upper.orElse(null));
     }
 
     private String createBetweenExpectedMessage(Item lower, Item upper) {

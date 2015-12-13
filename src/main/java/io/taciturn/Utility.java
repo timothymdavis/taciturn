@@ -1,23 +1,12 @@
 package io.taciturn;
 
+import java.time.Instant;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import io.taciturn.utility.ArrayUtility;
-import io.taciturn.utility.BooleanUtility;
-import io.taciturn.utility.ByteUtility;
-import io.taciturn.utility.CharacterUtility;
-import io.taciturn.utility.CollectionUtility;
-import io.taciturn.utility.DoubleUtility;
-import io.taciturn.utility.FloatUtility;
-import io.taciturn.utility.IntegerUtility;
-import io.taciturn.utility.LongUtility;
-import io.taciturn.utility.ObjectUtility;
-import io.taciturn.utility.AbstractUtility;
-import io.taciturn.utility.ShortUtility;
-import io.taciturn.utility.StreamUtility;
-import io.taciturn.utility.StringUtility;
+import io.taciturn.utility.*;
 
 public class Utility {
 
@@ -45,12 +34,20 @@ public class Utility {
         return new ByteUtility(object);
     }
 
+    public static DateUtility $(Date object) {
+        return new DateUtility(object);
+    }
+
     public static DoubleUtility $(Double object) {
         return new DoubleUtility(object);
     }
 
     public static FloatUtility $(Float object) {
         return new FloatUtility(object);
+    }
+
+    public static InstantUtility $(Instant object) {
+        return new InstantUtility(object);
     }
 
     public static IntegerUtility $(Integer object) {

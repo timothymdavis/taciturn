@@ -1,5 +1,8 @@
 package io.taciturn.utility;
 
+import java.text.DateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeParseException;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -22,12 +25,25 @@ public class StringUtility extends ComparableUtility<String> {
         return $(map(Boolean::parseBoolean).orElse(null));
     }
 
+    public DateUtility convertToDate() {
+        return convertToInstant().convertToDate();
+    }
+
     public DoubleUtility convertToDouble() {
         return convertToNumber(this::mustConvertToDouble, () -> new DoubleUtility(null));
     }
 
     public FloatUtility convertToFloat() {
         return convertToNumber(this::mustConvertToFloat, () -> new FloatUtility(null));
+    }
+
+    public InstantUtility convertToInstant() {
+        try {
+            return mustConvertToInstant();
+        }
+        catch (DateTimeParseException e) {
+            return new InstantUtility(null);
+        }
     }
 
     public IntegerUtility convertToInteger() {
@@ -67,12 +83,20 @@ public class StringUtility extends ComparableUtility<String> {
         }
     }
 
+    public DateUtility mustConvertToDate() {
+        return mustConvertToInstant().convertToDate();
+    }
+
     public DoubleUtility mustConvertToDouble() {
         return $(map(Double::parseDouble).orElse(null));
     }
 
     public FloatUtility mustConvertToFloat() {
         return $(map(Float::parseFloat).orElse(null));
+    }
+
+    public InstantUtility mustConvertToInstant() {
+        return $(map(Instant::parse).orElse(null));
     }
 
     public IntegerUtility mustConvertToInteger() {
