@@ -7,7 +7,7 @@ A contextual Java utility library intended to augment built-in objects, such as 
 
 This library is targeted to Java 8 users who want to add some extra functionality to their favorite objects. You
 will likely notice some similarities to notable Javascript libraries jQuery and Underscore. The goal of Taciturn
-is to only add what is missing. You won't find many passthrough methods to the wrapped objects.
+is to add what is missing, and make common, tedious operations more convenient.
 
 It should be noted that Taciturn is very immature at this time. Keep in mind that the method signatures may
 change over the coming weeks. Hopefully it will settle into a grove in the near future. Once we hit the `1.0.0`
@@ -22,20 +22,35 @@ from a raw array, which are then printed out to the console.
 
 ![alt text](site/image/hello-world.gif "Hello World")
 
-## Working With `Comparable` Objects
 
-I'll create a better gif later that uses the less-than and greater-than methods, but I think that you will
-get the gist from below.
-
-![alt text](https://github.com/timothymdavis/taciturn/raw/master/site/image/working-with-comparable.gif "Working with Comparable")
-
-## Working With `Array` Objects
+## Working With `Array` and `Collection` Objects
 
 You can create either create an array beforehand and pass it into Taciturn, or you can create it on the
 fly as shown below.
 
 ![alt text](https://github.com/timothymdavis/taciturn/raw/master/site/image/working-with-arrays.gif "Working with Arrays")
 
+## Working With `Comparable` Objects
+
+`Comparable` objects can be acted upon in three slightly different ways: boolean, filter, and assert.
+
+### Boolean Methods
+
+All of the boolean methods in Taciturn start with "is" (e.g. `isLessThan`,) and return a boolean value.
+
+### Filter Methods
+
+Filter methods are built-in predicates, are declarative in nature (e.g. `lessThan`,) and return a reference to the
+utility object.
+
+### Assert Methods
+
+All assert methods start with "must" (e.g. `mustBeLessThan`,) and return a reference to the utility object.
+
+![alt text](https://github.com/timothymdavis/taciturn/raw/master/site/image/working-with-comparable.gif "Working with Comparable")
+
 ## More to Come
 
-...
+Eventually I'll add more details on `Date`, `Instant`, and other utility objects. I also plan to add more to
+Taciturn. Expect to see utility objects for `InputStream`, `OutputStream`, and other common types. Right now, I want
+to get a solid foundation to build on.
