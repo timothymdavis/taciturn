@@ -22,14 +22,6 @@ from a raw array, which are then printed out to the console.
 
 ![alt text](site/image/hello-world.gif "Hello World")
 
-
-## Working With `Array` and `Collection` Objects
-
-You can create either create an array beforehand and pass it into Taciturn, or you can create it on the
-fly as shown below.
-
-![alt text](https://github.com/timothymdavis/taciturn/raw/master/site/image/working-with-arrays.gif "Working with Arrays")
-
 ## Working With `Comparable` Objects
 
 `Comparable` objects can be acted upon in three slightly different ways: boolean, filter, and assert.
@@ -48,6 +40,25 @@ utility object.
 All assert methods start with "must" (e.g. `mustBeLessThan`,) and return a reference to the utility object.
 
 ![alt text](https://github.com/timothymdavis/taciturn/raw/master/site/image/working-with-comparable.gif "Working with Comparable")
+
+
+## Working With `Array` and `Collection` Objects
+
+You can create either create an array beforehand and pass it into Taciturn, or you can create it on the
+fly as shown below.
+
+![alt text](https://github.com/timothymdavis/taciturn/raw/master/site/image/working-with-arrays.gif "Working with Arrays")
+
+## Working With `null` values
+
+You may have already noticed that `null` values are handled in a manner similar to `java.util.Optional`.
+Indeed, Taciture uses `Optional` under the hood to achieve most of what it does. This means that you can do
+things like
+
+    String name = null;
+    String lowerCaseName = $(name).map(String::toLowerCase).orElse(null);
+
+without checking for `null`.
 
 ## More to Come
 
