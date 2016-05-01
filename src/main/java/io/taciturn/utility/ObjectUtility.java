@@ -1,6 +1,8 @@
 package io.taciturn.utility;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
+import java.util.function.Predicate;
 
 import static io.taciturn.Utility.$;
 
@@ -17,6 +20,72 @@ public class ObjectUtility<Item> extends AbstractUtility<Item> {
 
     public ObjectUtility(Item object) {
         super(object);
+    }
+
+    public StreamUtility<FieldUtility> getAllFields(Predicate<Field> filter) {
+        return map(Object::getClass)
+                .map(Class::getDeclaredFields)
+                .map(o -> $(o)
+                        .filterEach(filter)
+                        .mapEach(f -> new FieldUtility(f, orElse(null))))
+                .orElse(null);
+    }
+
+    public StreamUtility<FieldUtility> getAllFields() {
+        return getAllFields(o -> true);
+    }
+
+    public StreamUtility<FieldUtility> getPublicFields() {
+        return getAllFields(FieldUtility.IS_PUBLIC_FIELD);
+    }
+
+    public StreamUtility<FieldUtility> getPrivateFields() {
+        return getAllFields(FieldUtility.IS_PRIVATE_FIELD);
+    }
+
+    public StreamUtility<FieldUtility> getProtectedFields() {
+        return getAllFields(FieldUtility.IS_PROTECTED_FIELD);
+    }
+
+    public StreamUtility<MethodUtility> getMethods(Predicate<Method> filter) {
+        return map(Object::getClass)
+                .map(Class::getDeclaredMethods)
+                .map(o -> $(o)
+                        .filterEach(filter)
+                        .mapEach(f -> new MethodUtility(f, orElse(null))))
+                .orElse(null);
+    }
+
+    public StreamUtility<MethodUtility> getAllGetterMethods() {
+        return getMethods(MethodUtility.IS_GETTER);
+    }
+
+    public StreamUtility<MethodUtility> getPublicGetterMethods() {
+        return getMethods(MethodUtility.IS_PUBLIC_METHOD.and(MethodUtility.IS_GETTER));
+    }
+
+    public StreamUtility<MethodUtility> getPrivateGetterMethods() {
+        return getMethods(MethodUtility.IS_PRIVATE_METHOD.and(MethodUtility.IS_GETTER));
+    }
+
+    public StreamUtility<MethodUtility> getProtectedGetterMethods() {
+        return getMethods(MethodUtility.IS_PROTECTED_METHOD.and(MethodUtility.IS_GETTER));
+    }
+
+    public StreamUtility<MethodUtility> getAllSetterMethods() {
+        return getMethods(MethodUtility.IS_SETTER);
+    }
+
+    public StreamUtility<MethodUtility> getPublicSetterMethods() {
+        return getMethods(MethodUtility.IS_PUBLIC_METHOD.and(MethodUtility.IS_SETTER));
+    }
+
+    public StreamUtility<MethodUtility> getPrivateSetterMethods() {
+        return getMethods(MethodUtility.IS_PRIVATE_METHOD.and(MethodUtility.IS_SETTER));
+    }
+
+    public StreamUtility<MethodUtility> getProtectedSetterMethods() {
+        return getMethods(MethodUtility.IS_PROTECTED_METHOD.and(MethodUtility.IS_SETTER));
     }
 
     @SuppressWarnings({ "unchecked", "ConstantConditions" })
