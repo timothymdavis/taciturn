@@ -8,6 +8,8 @@ import io.taciturn.function.CheckedConsumer;
 import io.taciturn.function.CheckedFunction;
 import io.taciturn.function.Rethrower;
 
+import static io.taciturn.Utility.$;
+
 public class FieldUtility extends ObjectUtility<Field> {
 
     public static final Predicate<Field> IS_PUBLIC_FIELD = o -> Modifier.isPublic(o.getModifiers());
@@ -215,8 +217,17 @@ public class FieldUtility extends ObjectUtility<Field> {
             return null;
         });
     }
+    
+    public void makeAccessible() {
+        ifPresent(field -> $(field).filter(f -> !Modifier.isPublic(f.getModifiers()) ||
+                                                Modifier.isFinal(f.getModifiers()) ||
+                                                !Modifier.isPublic(f.getDeclaringClass().getModifiers()))
+                                   .filter(f -> !f.isAccessible())
+                                   .ifPresent(f -> f.setAccessible(true)));
+    }
 
     private <T> T wrap(CheckedFunction<Field, T> function) {
+        makeAccessible();
         return map(o -> Rethrower.rethrow(function, o)).orElse(null);
     }
 

@@ -1,5 +1,7 @@
 package io.taciturn.utility;
 
+import java.lang.reflect.Method;
+
 import org.junit.Test;
 
 import static io.taciturn.Utility.$;
@@ -37,21 +39,22 @@ public class ScratchTest {
         user.setLastName("Davis");
 
         $(user).getPublicGetterMethods()
-               .mapEach(o -> o.invoke())
-               .filterEach(o -> o != null)
+               .mapEach(o -> o.map(Method::getName).orElse("") + ": " + o.invoke())
                .forEach(System.out::println);
 
-        $(user).getPublicSetterMethods().forEach(o -> o.invoke("New Value"));
+        $(user).getPrivateFields()
+               .filterEach(o -> o.map(f -> Boolean.class.equals(f.getType())).orElse(false))
+               .forEach(o -> o.setObject(true));
         
         $(user).getPublicGetterMethods()
-               .mapEach(o -> o.invoke())
-               .filterEach(o -> o != null)
+               .mapEach(o -> o.map(Method::getName).orElse("") + ": " + o.invoke())
                .forEach(System.out::println);
     }
     
     public static class User {
 
-        public String firstName;
+        private Boolean olderThan18;
+        private String firstName;
         private String LastName;
 
         public void someVoidMethod() {
@@ -73,7 +76,14 @@ public class ScratchTest {
         public void setLastName(String lastName) {
             LastName = lastName;
         }
-        
+
+        public Boolean getOlderThan18() {
+            return olderThan18;
+        }
+
+        public void setOlderThan18(Boolean olderThan18) {
+            this.olderThan18 = olderThan18;
+        }
     }
 
 }

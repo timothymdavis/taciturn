@@ -8,6 +8,8 @@ import java.util.function.Predicate;
 import io.taciturn.function.CheckedFunction;
 import io.taciturn.function.Rethrower;
 
+import static io.taciturn.Utility.$;
+
 public class MethodUtility extends ObjectUtility<Method> {
 
     public static final Predicate<Method> IS_PUBLIC_METHOD = o -> Modifier.isPublic(o.getModifiers());
@@ -41,8 +43,16 @@ public class MethodUtility extends ObjectUtility<Method> {
     public <T> T invoke(Object... arguments) {
         return wrap(o -> (T) o.invoke(parent, arguments));
     }
+
+    public void makeAccessible() {
+        ifPresent(method -> $(method).filter(m -> !Modifier.isPublic(m.getModifiers()) ||
+                                                  !Modifier.isPublic(m.getDeclaringClass().getModifiers()))
+                                     .filter(m -> !m.isAccessible())
+                                     .ifPresent(m -> m.setAccessible(true)));
+    }
     
     private <T> T wrap(CheckedFunction<Method, T> function) {
+        makeAccessible();
         return map(o -> Rethrower.rethrow(function, o)).orElse(null);
     }
 
