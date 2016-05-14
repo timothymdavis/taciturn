@@ -8,12 +8,44 @@ import java.util.stream.Stream;
 
 import io.taciturn.utility.*;
 
+/**
+ * This library is targeted to Java 8 users who want to add some extra functionality to their favorite objects. You
+ * will likely notice some similarities to notable Javascript libraries jQuery and Underscore. The goal of Taciturn is
+ * to add what is missing, and make common, tedious operations more convenient.
+ * <p/>
+ * It should be noted that Taciturn is very immature at this time. Keep in mind that the method signatures may change
+ * over the coming months. Hopefully it will settle into a grove in the near future. Once we hit the 1.0.0 version, I
+ * will be sure to deprecate anything that will disappear in an upcoming release. Until then, I hope that you will be
+ * willing to put up with a small amount of chaos.
+ */
 public class Utility {
 
+    /**
+     * Example code:
+     * <p/>
+     * <code>
+     *     $('a').toSet();
+     * </code>
+     * <p/>
+     * @param object Object to augment.
+     * @param <Item> The type of object to augment.
+     * @return the utility that wraps the object to augment.
+     */
     public static <Item> ObjectUtility<Item> $(Item object) {
         return new ObjectUtility<>(object);
     }
 
+    /**
+     * Example code:
+     * <p/>
+     * <code>
+     *     $("a", "3", "2").reduce((a, b) -> a + b).ifPresent(System.out::println);
+     * </code>
+     * <p/>
+     * @param object Object to augment.
+     * @param <Item> The type of object to augment.
+     * @return the utility that wraps the object to augment.
+     */
     public static <Item> ArrayUtility<Item> $(Item[] object) {
         return new ArrayUtility<>(object);
     }
