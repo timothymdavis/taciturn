@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import static io.taciturn.Utility.$;
 
+@SuppressWarnings("WeakerAccess")
 public class ComparableUtility<Item extends Comparable<Item>>
         extends ObjectUtility<Item> {
 

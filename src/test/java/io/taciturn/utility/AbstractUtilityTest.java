@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
@@ -72,9 +73,9 @@ public class AbstractUtilityTest {
 
     @Test
     public void testMustBe() throws Exception {
-        $((Object) null).mustBe(o -> o == null);
+        $((Object) null).mustBe(Objects::isNull);
         try {
-            $((Object) null).mustBe(o -> o != null);
+            $((Object) null).mustBe(Objects::nonNull);
             fail("An exception should have been thrown.");
         } catch (InvalidContractException ignored) {
         }
@@ -82,14 +83,15 @@ public class AbstractUtilityTest {
 
     @Test(expected = InvalidContractException.class)
     public void testMustBeWithMessage() throws Exception {
-        $((Object) null).mustBe(o -> o != null, "This value should not be null!");
+        $(new Object()).mustBe(Objects::isNull, "This value should be null!");
+        $((Object) null).mustBe(Objects::nonNull, "This value should not be null!");
     }
 
     @Test
     public void testMustNotBe() throws Exception {
-        $((Object) null).mustNotBe(o -> o != null);
+        $((Object) null).mustNotBe(Objects::nonNull);
         try {
-            $((Object) null).mustNotBe(o -> o == null);
+            $((Object) null).mustNotBe(Objects::isNull);
             fail("An exception should have been thrown.");
         } catch (InvalidContractException ignored) {
         }
@@ -97,7 +99,8 @@ public class AbstractUtilityTest {
 
     @Test(expected = InvalidContractException.class)
     public void testMustNotBeWithMessage() throws Exception {
-        $((Object) null).mustNotBe(o -> o == null, "This value should not be null!");
+        $((Object) null).mustNotBe(Objects::isNull, "This value should not be null!");
+        $(new Object()).mustNotBe(Objects::nonNull, "This value should be null!");
     }
 
     @Test

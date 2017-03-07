@@ -1,6 +1,7 @@
 package io.taciturn.utility;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class ScratchTest {
     public void scratch() throws Exception {
         $("a", "3", "2")
                 .mapEach(i -> $(i).convertToInteger(16).orElse(null))
-                .filterEach(o -> o != null)
+                .filterEach(Objects::nonNull)
                 .reduce((a, b) -> a + b)
                 .ifPresent(System.out::println);
 
@@ -28,7 +29,7 @@ public class ScratchTest {
         user.setLastName("Davis");
         $(user).getPublicFields()
                .mapEach(FieldUtility::getObject)
-               .filterEach(o -> o != null)
+               .filterEach(Objects::nonNull)
                .forEach(System.out::println);
     }
 
@@ -51,6 +52,7 @@ public class ScratchTest {
                .forEach(System.out::println);
     }
     
+    @SuppressWarnings({"unused", "WeakerAccess", "SameParameterValue"})
     public static class User {
 
         private Boolean olderThan18;

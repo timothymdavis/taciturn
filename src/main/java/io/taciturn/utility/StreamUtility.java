@@ -32,6 +32,7 @@ import java.util.stream.Stream;
 
 import static io.taciturn.Utility.$;
 
+@SuppressWarnings("WeakerAccess")
 public class StreamUtility<Item> extends AbstractUtility<Stream<Item>> {
 
     public StreamUtility(Stream<Item> object) {
@@ -81,7 +82,7 @@ public class StreamUtility<Item> extends AbstractUtility<Stream<Item>> {
     }
 
     public <R> StreamUtility<R> flatMapEach(Function<? super Item, ? extends Stream<? extends R>> mapper) {
-        return $(map(s -> s.flatMap(mapper)).orElse(null));
+        return $(map(s -> s.<R>flatMap(mapper)).orElse(null));
     }
 
     /* This should return a DoubleStreamUtility at some point. */
@@ -120,7 +121,7 @@ public class StreamUtility<Item> extends AbstractUtility<Stream<Item>> {
     }
 
     public <R> StreamUtility<R> mapEach(Function<? super Item, ? extends R> mapper) {
-        return $(map(s -> s.map(mapper)).orElse(null));
+        return $(map(s -> s.<R>map(mapper)).orElse(null));
     }
 
     /* This should return a DoubleStreamUtility at some point. */

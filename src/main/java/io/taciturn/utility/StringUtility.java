@@ -1,6 +1,5 @@
 package io.taciturn.utility;
 
-import java.text.DateFormat;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
 import java.util.function.Predicate;

@@ -5,17 +5,12 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import org.hamcrest.core.Is;
-import org.hamcrest.core.IsInstanceOf;
-import org.hamcrest.core.IsNull;
 import org.junit.Assert;
 import org.junit.Test;
 
 import static io.taciturn.Utility.$;
-import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.*;
 
 public class UtilityTest {
 
@@ -33,7 +28,7 @@ public class UtilityTest {
 
     @Test
     public void test$Collection() throws Exception {
-        Assert.assertThat($(new ArrayList()).get(), instanceOf(Collection.class));
+        Assert.assertThat($(new ArrayList<>()).get(), instanceOf(Collection.class));
         Assert.assertThat($((Collection<Object>) null).orElse(null), nullValue());
     }
 
@@ -87,7 +82,7 @@ public class UtilityTest {
 
     @Test
     public void test$StreamUtility() throws Exception {
-        Assert.assertThat($(new ArrayList().stream()).get(), instanceOf(Stream.class));
+        Assert.assertThat($(new ArrayList<>().stream()).get(), instanceOf(Stream.class));
         Assert.assertThat($((Stream<Object>) null).orElse(null), nullValue());
     }
 

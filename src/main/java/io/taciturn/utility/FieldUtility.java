@@ -213,7 +213,7 @@ public class FieldUtility extends ObjectUtility<Field> {
 
     private void set(CheckedConsumer<Field> consumer) {
         wrap(o -> {
-            consumer.apply(o);
+            consumer.accept(o);
             return null;
         });
     }

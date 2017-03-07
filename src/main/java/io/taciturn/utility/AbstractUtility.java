@@ -9,8 +9,10 @@ import java.util.function.Supplier;
 
 import static io.taciturn.Utility.$;
 
+@SuppressWarnings("WeakerAccess")
 public abstract class AbstractUtility<Item> {
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private Optional<Item> object;
 
     public AbstractUtility(Item object) {
@@ -40,6 +42,7 @@ public abstract class AbstractUtility<Item> {
         return $(this.object.flatMap(mapper).orElse(null));
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public Item get() {
         return object.get();
     }

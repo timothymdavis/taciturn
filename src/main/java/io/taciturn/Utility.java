@@ -107,6 +107,7 @@ public class Utility {
         return new ArrayUtility<>(first, rest);
     }
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     public <Item> AbstractUtility<Item> $(Optional<Item> object) {
         return $(object.orElse(null));
     }
