@@ -6,7 +6,22 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import io.taciturn.utility.*;
+import io.taciturn.utility.AbstractUtility;
+import io.taciturn.utility.ArrayUtility;
+import io.taciturn.utility.BooleanUtility;
+import io.taciturn.utility.ByteUtility;
+import io.taciturn.utility.CharacterUtility;
+import io.taciturn.utility.CollectionUtility;
+import io.taciturn.utility.DateUtility;
+import io.taciturn.utility.DoubleUtility;
+import io.taciturn.utility.FloatUtility;
+import io.taciturn.utility.InstantUtility;
+import io.taciturn.utility.IntegerUtility;
+import io.taciturn.utility.LongUtility;
+import io.taciturn.utility.ObjectUtility;
+import io.taciturn.utility.ShortUtility;
+import io.taciturn.utility.StreamUtility;
+import io.taciturn.utility.StringUtility;
 
 /**
  * This library is targeted to Java 8 users who want to add some extra functionality to their favorite objects. You
@@ -23,10 +38,23 @@ public class Utility {
     /**
      * Example code:
      * <p/>
-     * <code>
+     * <pre>
+     *     boolean primitive = $(Boolean.TRUE).asPrimitive();
+     *
+     *     $(1).filter(i -> i < 5).ifPresent(System.out::println);
+     *
+     *     boolean between = $(5).isBetween(1, 10)
+     *     boolean greaterThan = $(1).isGreaterThan(5);
+     *
+     *     $(1).lessThanOrEqualTo(5).ifPresent(System.out::println);
+     *
+     *     $("b").mustNotBeNull(); // Throws NullPointerException
+     *
+     *     $(1).toArray();
+     *     $(4L).toArrayDeque()
+     *     $("one").toArrayList();
      *     $('a').toSet();
-     * </code>
-     * <p/>
+     * </pre>
      * @param object Object to augment.
      * @param <Item> The type of object to augment.
      * @return the utility that wraps the object to augment.
@@ -39,7 +67,7 @@ public class Utility {
      * Example code:
      * <p/>
      * <code>
-     *     $("a", "3", "2").reduce((a, b) -> a + b).ifPresent(System.out::println);
+     *     $(new String[]{"a", "3", "2"}).reduce((a, b) -> a + b).ifPresent(System.out::println);
      * </code>
      * <p/>
      * @param object Object to augment.
@@ -54,16 +82,25 @@ public class Utility {
         return new CollectionUtility<>(object);
     }
 
+    /**
+     * Example code:
+     * <p/>
+     * <pre>
+     *     boolean asPrimitive = $(Boolean.TRUE).asPrimitive();
+     * </pre>
+     * @param object Object to augment.
+     * @return the utility that wraps the object to augment.
+     */
     public static BooleanUtility $(Boolean object) {
         return new BooleanUtility(object);
     }
 
-    public static CharacterUtility $(Character object) {
-        return new CharacterUtility(object);
-    }
-
     public static ByteUtility $(Byte object) {
         return new ByteUtility(object);
+    }
+
+    public static CharacterUtility $(Character object) {
+        return new CharacterUtility(object);
     }
 
     public static DateUtility $(Date object) {
@@ -82,6 +119,15 @@ public class Utility {
         return new InstantUtility(object);
     }
 
+    /**
+     * Example code:
+     * <p/>
+     * <pre>
+     *     int asPrimitive = $(Integer.valueOf(1)).asPrimitive();
+     * </pre>
+     * @param object Object to augment.
+     * @return the utility that wraps the object to augment.
+     */
     public static IntegerUtility $(Integer object) {
         return new IntegerUtility(object);
     }
@@ -102,6 +148,18 @@ public class Utility {
         return new StringUtility(object);
     }
 
+    /**
+     * Example code:
+     * <p/>
+     * <code>
+     *     $("a", "3", "2").reduce((a, b) -> a + b).ifPresent(System.out::println);
+     * </code>
+     * <p/>
+     * @param first The first object to add to the array.
+     * @param rest The rest of the objects to add to the array.
+     * @param <Item> The type of object to augment.
+     * @return the utility that wraps the object to augment.
+     */
     @SafeVarargs
     public static <Item> ArrayUtility<Item> $(Item first, Item... rest) {
         return new ArrayUtility<>(first, rest);
