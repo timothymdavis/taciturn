@@ -15,7 +15,7 @@ public class CharacterUtility extends ComparableUtility<Character> {
         return map(o -> Character.toString(o)).orElse(null);
     }
 
-    public StringUtility convertToString() {
+    public StringUtility mapToString() {
         return $(toString());
     }
 

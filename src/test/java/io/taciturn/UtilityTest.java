@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
 import org.junit.Test;
 

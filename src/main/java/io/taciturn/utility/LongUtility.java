@@ -15,7 +15,7 @@ public class LongUtility extends ComparableUtility<Long> {
         return map(o -> Long.toString(o)).orElse(null);
     }
 
-    public StringUtility convertToString() {
+    public StringUtility mapToString() {
         return $(toString());
     }
 

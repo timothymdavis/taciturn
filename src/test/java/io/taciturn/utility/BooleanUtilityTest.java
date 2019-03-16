@@ -19,11 +19,11 @@ public class BooleanUtilityTest {
 
     @Test
     public void testConvertToString() throws Exception {
-        Assert.assertThat($(true).convertToString().orElse(null), is("true"));
-        Assert.assertThat($(true).convertToString().orElse(null), is(Boolean.TRUE.toString()));
-        Assert.assertThat($(false).convertToString().orElse(null), is("false"));
-        Assert.assertThat($(false).convertToString().orElse(null), is(Boolean.FALSE.toString()));
-        Assert.assertThat($((Boolean) null).convertToString().orElse(null), is((String) null));
+        Assert.assertThat($(true).mapToString().orElse(null), is("true"));
+        Assert.assertThat($(true).mapToString().orElse(null), is(Boolean.TRUE.toString()));
+        Assert.assertThat($(false).mapToString().orElse(null), is("false"));
+        Assert.assertThat($(false).mapToString().orElse(null), is(Boolean.FALSE.toString()));
+        Assert.assertThat($((Boolean) null).mapToString().orElse(null), is((String) null));
     }
 
     @Test

@@ -15,11 +15,11 @@ public class IntegerUtility extends ComparableUtility<Integer> {
         return map(o -> Integer.toString(o)).orElse(null);
     }
 
-    public StringUtility convertToString() {
+    public StringUtility mapToString() {
         return $(toString());
     }
 
-    public StringUtility convertToString(int radix) {
+    public StringUtility mapToString(int radix) {
         return $(map(o -> Integer.toString(o, radix)).orElse(null));
     }
 

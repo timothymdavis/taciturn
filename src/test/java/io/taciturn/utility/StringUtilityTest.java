@@ -22,120 +22,120 @@ public class StringUtilityTest {
 
     @Test
     public void testConvertToBoolean() throws Exception {
-        assertThat($((String) null).convertToBoolean().isPresent(), is(false));
-        assertThat($((String) null).convertToBoolean().orElse(BooleanUtility.DEFAULT_VALUE), is(false));
-        assertThat($("false").convertToBoolean().isPresent(), is(true));
-        assertThat($("false").convertToBoolean().orElse(BooleanUtility.DEFAULT_VALUE), is(false));
-        assertThat($("false").convertToBoolean().orElse(null), is(false));
-        assertThat($("true").convertToBoolean().orElse(BooleanUtility.DEFAULT_VALUE), is(true));
-        assertThat($("True").convertToBoolean().orElse(BooleanUtility.DEFAULT_VALUE), is(true));
-        assertThat($("TRUE").convertToBoolean().orElse(BooleanUtility.DEFAULT_VALUE), is(true));
+        assertThat($((String) null).mapToBoolean().isPresent(), is(false));
+        assertThat($((String) null).mapToBoolean().orElse(BooleanUtility.DEFAULT_VALUE), is(false));
+        assertThat($("false").mapToBoolean().isPresent(), is(true));
+        assertThat($("false").mapToBoolean().orElse(BooleanUtility.DEFAULT_VALUE), is(false));
+        assertThat($("false").mapToBoolean().orElse(null), is(false));
+        assertThat($("true").mapToBoolean().orElse(BooleanUtility.DEFAULT_VALUE), is(true));
+        assertThat($("True").mapToBoolean().orElse(BooleanUtility.DEFAULT_VALUE), is(true));
+        assertThat($("TRUE").mapToBoolean().orElse(BooleanUtility.DEFAULT_VALUE), is(true));
     }
 
     @Test
     public void testConvertToDouble() throws Exception {
-        assertThat($((String) null).convertToDouble().isPresent(), is(false));
-        assertThat($((String) null).convertToDouble().orElse(null), nullValue());
-        assertThat($((String) null).convertToDouble().orElse(DoubleUtility.DEFAULT_VALUE), is(0.0D));
-        assertThat($("").convertToDouble().isPresent(), is(false));
-        assertThat($("").convertToDouble().orElse(DoubleUtility.DEFAULT_VALUE), is(0.0D));
-        assertThat($("1.0").convertToDouble().isPresent(), is(true));
-        assertThat($("1.0").convertToDouble().orElse(DoubleUtility.DEFAULT_VALUE), is(1.0D));
+        assertThat($((String) null).mapToDouble().isPresent(), is(false));
+        assertThat($((String) null).mapToDouble().orElse(null), nullValue());
+        assertThat($((String) null).mapToDouble().orElse(DoubleUtility.DEFAULT_VALUE), is(0.0D));
+        assertThat($("").mapToDouble().isPresent(), is(false));
+        assertThat($("").mapToDouble().orElse(DoubleUtility.DEFAULT_VALUE), is(0.0D));
+        assertThat($("1.0").mapToDouble().isPresent(), is(true));
+        assertThat($("1.0").mapToDouble().orElse(DoubleUtility.DEFAULT_VALUE), is(1.0D));
     }
 
     @Test
     public void testConvertToFloat() throws Exception {
-        assertThat($((String) null).convertToFloat().isPresent(), is(false));
-        assertThat($((String) null).convertToFloat().orElse(null), nullValue());
-        assertThat($((String) null).convertToFloat().orElse(FloatUtility.DEFAULT_VALUE), is(0.0F));
-        assertThat($("").convertToFloat().isPresent(), is(false));
-        assertThat($("").convertToFloat().orElse(FloatUtility.DEFAULT_VALUE), is(0.0F));
-        assertThat($("1.0").convertToFloat().isPresent(), is(true));
-        assertThat($("1.0").convertToFloat().orElse(FloatUtility.DEFAULT_VALUE), is(1.0F));
+        assertThat($((String) null).mapToFloat().isPresent(), is(false));
+        assertThat($((String) null).mapToFloat().orElse(null), nullValue());
+        assertThat($((String) null).mapToFloat().orElse(FloatUtility.DEFAULT_VALUE), is(0.0F));
+        assertThat($("").mapToFloat().isPresent(), is(false));
+        assertThat($("").mapToFloat().orElse(FloatUtility.DEFAULT_VALUE), is(0.0F));
+        assertThat($("1.0").mapToFloat().isPresent(), is(true));
+        assertThat($("1.0").mapToFloat().orElse(FloatUtility.DEFAULT_VALUE), is(1.0F));
     }
 
     @Test
     public void testConvertToInteger() throws Exception {
-        assertThat($((String) null).convertToInteger().isPresent(), is(false));
-        assertThat($((String) null).convertToInteger().orElse(null), nullValue());
-        assertThat($((String) null).convertToInteger().orElse(IntegerUtility.DEFAULT_VALUE), is(0));
-        assertThat($("").convertToInteger().isPresent(), is(false));
-        assertThat($("").convertToInteger().orElse(IntegerUtility.DEFAULT_VALUE), is(0));
-        assertThat($("1.0").convertToInteger().isPresent(), is(false));
-        assertThat($("1.0").convertToInteger().orElse(IntegerUtility.DEFAULT_VALUE), is(0));
-        assertThat($("1").convertToInteger().isPresent(), is(true));
-        assertThat($("1").convertToInteger().orElse(IntegerUtility.DEFAULT_VALUE), is(1));
+        assertThat($((String) null).mapToInteger().isPresent(), is(false));
+        assertThat($((String) null).mapToInteger().orElse(null), nullValue());
+        assertThat($((String) null).mapToInteger().orElse(IntegerUtility.DEFAULT_VALUE), is(0));
+        assertThat($("").mapToInteger().isPresent(), is(false));
+        assertThat($("").mapToInteger().orElse(IntegerUtility.DEFAULT_VALUE), is(0));
+        assertThat($("1.0").mapToInteger().isPresent(), is(false));
+        assertThat($("1.0").mapToInteger().orElse(IntegerUtility.DEFAULT_VALUE), is(0));
+        assertThat($("1").mapToInteger().isPresent(), is(true));
+        assertThat($("1").mapToInteger().orElse(IntegerUtility.DEFAULT_VALUE), is(1));
     }
 
     @Test
     public void testConvertToIntegerWithRadix() throws Exception {
-        assertThat($((String) null).convertToInteger(2).isPresent(), is(false));
-        assertThat($((String) null).convertToInteger(2).orElse(null), nullValue());
-        assertThat($((String) null).convertToInteger(2).orElse(IntegerUtility.DEFAULT_VALUE), is(0));
-        assertThat($("").convertToInteger(2).isPresent(), is(false));
-        assertThat($("").convertToInteger(2).orElse(IntegerUtility.DEFAULT_VALUE), is(0));
-        assertThat($("1.0").convertToInteger(2).isPresent(), is(false));
-        assertThat($("1.0").convertToInteger(2).orElse(IntegerUtility.DEFAULT_VALUE), is(0));
-        assertThat($("1001").convertToInteger(2).isPresent(), is(true));
-        assertThat($("1001").convertToInteger(2).orElse(IntegerUtility.DEFAULT_VALUE), is(9));
-        assertThat($("9A1E").convertToInteger(16).isPresent(), is(true));
-        assertThat($("9A1E").convertToInteger(16).orElse(IntegerUtility.DEFAULT_VALUE), is(39454));
+        assertThat($((String) null).mapToInteger(2).isPresent(), is(false));
+        assertThat($((String) null).mapToInteger(2).orElse(null), nullValue());
+        assertThat($((String) null).mapToInteger(2).orElse(IntegerUtility.DEFAULT_VALUE), is(0));
+        assertThat($("").mapToInteger(2).isPresent(), is(false));
+        assertThat($("").mapToInteger(2).orElse(IntegerUtility.DEFAULT_VALUE), is(0));
+        assertThat($("1.0").mapToInteger(2).isPresent(), is(false));
+        assertThat($("1.0").mapToInteger(2).orElse(IntegerUtility.DEFAULT_VALUE), is(0));
+        assertThat($("1001").mapToInteger(2).isPresent(), is(true));
+        assertThat($("1001").mapToInteger(2).orElse(IntegerUtility.DEFAULT_VALUE), is(9));
+        assertThat($("9A1E").mapToInteger(16).isPresent(), is(true));
+        assertThat($("9A1E").mapToInteger(16).orElse(IntegerUtility.DEFAULT_VALUE), is(39454));
     }
 
     @Test
     public void testConvertToLong() throws Exception {
-        assertThat($((String) null).convertToLong().isPresent(), is(false));
-        assertThat($((String) null).convertToLong().orElse(null), nullValue());
-        assertThat($((String) null).convertToLong().orElse(LongUtility.DEFAULT_VALUE), is(0L));
-        assertThat($("").convertToLong().isPresent(), is(false));
-        assertThat($("").convertToLong().orElse(LongUtility.DEFAULT_VALUE), is(0L));
-        assertThat($("1.0").convertToLong().isPresent(), is(false));
-        assertThat($("1.0").convertToLong().orElse(LongUtility.DEFAULT_VALUE), is(0L));
-        assertThat($("1").convertToLong().isPresent(), is(true));
-        assertThat($("1").convertToLong().orElse(LongUtility.DEFAULT_VALUE), is(1L));
+        assertThat($((String) null).mapToLong().isPresent(), is(false));
+        assertThat($((String) null).mapToLong().orElse(null), nullValue());
+        assertThat($((String) null).mapToLong().orElse(LongUtility.DEFAULT_VALUE), is(0L));
+        assertThat($("").mapToLong().isPresent(), is(false));
+        assertThat($("").mapToLong().orElse(LongUtility.DEFAULT_VALUE), is(0L));
+        assertThat($("1.0").mapToLong().isPresent(), is(false));
+        assertThat($("1.0").mapToLong().orElse(LongUtility.DEFAULT_VALUE), is(0L));
+        assertThat($("1").mapToLong().isPresent(), is(true));
+        assertThat($("1").mapToLong().orElse(LongUtility.DEFAULT_VALUE), is(1L));
     }
 
     @Test
     public void testConvertToLongWithRadix() throws Exception {
-        assertThat($((String) null).convertToLong(2).isPresent(), is(false));
-        assertThat($((String) null).convertToLong(2).orElse(null), nullValue());
-        assertThat($((String) null).convertToLong(2).orElse(LongUtility.DEFAULT_VALUE), is(0L));
-        assertThat($("").convertToLong(2).isPresent(), is(false));
-        assertThat($("").convertToLong(2).orElse(LongUtility.DEFAULT_VALUE), is(0L));
-        assertThat($("1.0").convertToLong(2).isPresent(), is(false));
-        assertThat($("1.0").convertToLong(2).orElse(LongUtility.DEFAULT_VALUE), is(0L));
-        assertThat($("1001").convertToLong(2).isPresent(), is(true));
-        assertThat($("1001").convertToLong(2).orElse(LongUtility.DEFAULT_VALUE), is(9L));
-        assertThat($("9A1E").convertToLong(16).isPresent(), is(true));
-        assertThat($("9A1E").convertToLong(16).orElse(LongUtility.DEFAULT_VALUE), is(39454L));
+        assertThat($((String) null).mapToLong(2).isPresent(), is(false));
+        assertThat($((String) null).mapToLong(2).orElse(null), nullValue());
+        assertThat($((String) null).mapToLong(2).orElse(LongUtility.DEFAULT_VALUE), is(0L));
+        assertThat($("").mapToLong(2).isPresent(), is(false));
+        assertThat($("").mapToLong(2).orElse(LongUtility.DEFAULT_VALUE), is(0L));
+        assertThat($("1.0").mapToLong(2).isPresent(), is(false));
+        assertThat($("1.0").mapToLong(2).orElse(LongUtility.DEFAULT_VALUE), is(0L));
+        assertThat($("1001").mapToLong(2).isPresent(), is(true));
+        assertThat($("1001").mapToLong(2).orElse(LongUtility.DEFAULT_VALUE), is(9L));
+        assertThat($("9A1E").mapToLong(16).isPresent(), is(true));
+        assertThat($("9A1E").mapToLong(16).orElse(LongUtility.DEFAULT_VALUE), is(39454L));
     }
 
     @Test
     public void testConvertToShort() throws Exception {
-        assertThat($((String) null).convertToShort().isPresent(), is(false));
-        assertThat($((String) null).convertToShort().orElse(null), nullValue());
-        assertThat($((String) null).convertToShort().orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
-        assertThat($("").convertToShort().isPresent(), is(false));
-        assertThat($("").convertToShort().orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
-        assertThat($("1.0").convertToShort().isPresent(), is(false));
-        assertThat($("1.0").convertToShort().orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
-        assertThat($("1").convertToShort().isPresent(), is(true));
-        assertThat($("1").convertToShort().orElse(ShortUtility.DEFAULT_VALUE), is((short) 1));
+        assertThat($((String) null).mapToShort().isPresent(), is(false));
+        assertThat($((String) null).mapToShort().orElse(null), nullValue());
+        assertThat($((String) null).mapToShort().orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
+        assertThat($("").mapToShort().isPresent(), is(false));
+        assertThat($("").mapToShort().orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
+        assertThat($("1.0").mapToShort().isPresent(), is(false));
+        assertThat($("1.0").mapToShort().orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
+        assertThat($("1").mapToShort().isPresent(), is(true));
+        assertThat($("1").mapToShort().orElse(ShortUtility.DEFAULT_VALUE), is((short) 1));
     }
 
     @Test
     public void testConvertToShortWithRadix() throws Exception {
-        assertThat($((String) null).convertToShort(2).isPresent(), is(false));
-        assertThat($((String) null).convertToShort(2).orElse(null), nullValue());
-        assertThat($((String) null).convertToShort(2).orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
-        assertThat($("").convertToShort(2).isPresent(), is(false));
-        assertThat($("").convertToShort(2).orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
-        assertThat($("1.0").convertToShort(2).isPresent(), is(false));
-        assertThat($("1.0").convertToShort(2).orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
-        assertThat($("1001").convertToShort(2).isPresent(), is(true));
-        assertThat($("1001").convertToShort(2).orElse(ShortUtility.DEFAULT_VALUE), is((short) 9));
-        assertThat($("111E").convertToShort(16).isPresent(), is(true));
-        assertThat($("111E").convertToShort(16).orElse(ShortUtility.DEFAULT_VALUE), is((short) 4382));
+        assertThat($((String) null).mapToShort(2).isPresent(), is(false));
+        assertThat($((String) null).mapToShort(2).orElse(null), nullValue());
+        assertThat($((String) null).mapToShort(2).orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
+        assertThat($("").mapToShort(2).isPresent(), is(false));
+        assertThat($("").mapToShort(2).orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
+        assertThat($("1.0").mapToShort(2).isPresent(), is(false));
+        assertThat($("1.0").mapToShort(2).orElse(ShortUtility.DEFAULT_VALUE), is((short) 0));
+        assertThat($("1001").mapToShort(2).isPresent(), is(true));
+        assertThat($("1001").mapToShort(2).orElse(ShortUtility.DEFAULT_VALUE), is((short) 9));
+        assertThat($("111E").mapToShort(16).isPresent(), is(true));
+        assertThat($("111E").mapToShort(16).orElse(ShortUtility.DEFAULT_VALUE), is((short) 4382));
     }
 
     @Test

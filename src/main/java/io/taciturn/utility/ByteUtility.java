@@ -15,7 +15,7 @@ public class ByteUtility extends ComparableUtility<Byte> {
         return map(o -> Byte.toString(o)).orElse(null);
     }
 
-    public StringUtility convertToString() {
+    public StringUtility mapToString() {
         return $(toString());
     }
 

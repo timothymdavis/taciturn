@@ -15,7 +15,7 @@ public class DoubleUtility extends ComparableUtility<Double> {
         return map(o -> Double.toString(o)).orElse(null);
     }
 
-    public StringUtility convertToString() {
+    public StringUtility mapToString() {
         return $(toString());
     }
 

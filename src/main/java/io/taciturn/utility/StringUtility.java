@@ -20,23 +20,35 @@ public class StringUtility extends ComparableUtility<String> {
         return filter(isBlankPredicate);
     }
 
-    public BooleanUtility convertToBoolean() {
-        return $(map(Boolean::parseBoolean).orElse(null));
+    public Boolean toBoolean() {
+        return map(Boolean::parseBoolean).orElse(null);
     }
 
-    public DateUtility convertToDate() {
-        return convertToInstant().convertToDate();
+    public BooleanUtility mapToBoolean() {
+        return $(toBoolean());
     }
 
-    public DoubleUtility convertToDouble() {
-        return convertToNumber(this::mustConvertToDouble, () -> new DoubleUtility(null));
+    public DateUtility mapToDate() {
+        return mapToInstant().mapToDate();
     }
 
-    public FloatUtility convertToFloat() {
-        return convertToNumber(this::mustConvertToFloat, () -> new FloatUtility(null));
+    public Double toDouble() {
+        return map(Double::parseDouble).orElse(null);
     }
 
-    public InstantUtility convertToInstant() {
+    public DoubleUtility mapToDouble() {
+        return mapToNumber(this::mustConvertToDouble, () -> new DoubleUtility(null));
+    }
+
+    public Float toFloat() {
+        return map(Float::parseFloat).orElse(null);
+    }
+
+    public FloatUtility mapToFloat() {
+        return mapToNumber(this::mustConvertToFloat, () -> new FloatUtility(null));
+    }
+
+    public InstantUtility mapToInstant() {
         try {
             return mustConvertToInstant();
         }
@@ -45,31 +57,55 @@ public class StringUtility extends ComparableUtility<String> {
         }
     }
 
-    public IntegerUtility convertToInteger() {
-        return convertToNumber(this::mustConvertToInteger, () -> new IntegerUtility(null));
+    public Integer toInteger() {
+        return map(Integer::parseInt).orElse(null);
     }
 
-    public IntegerUtility convertToInteger(int radix) {
-        return convertToNumber(() -> mustConvertToInteger(radix), () -> new IntegerUtility(null));
+    public IntegerUtility mapToInteger() {
+        return mapToNumber(this::mustConvertToInteger, () -> new IntegerUtility(null));
     }
 
-    public LongUtility convertToLong() {
-        return convertToNumber(this::mustConvertToLong, () -> new LongUtility(null));
+    public Integer toInteger(int radix) {
+        return map(o -> Integer.parseInt(o, radix)).orElse(null);
     }
 
-    public LongUtility convertToLong(int radix) {
-        return convertToNumber(() -> mustConvertToLong(radix), () -> new LongUtility(null));
+    public IntegerUtility mapToInteger(int radix) {
+        return mapToNumber(() -> mustConvertToInteger(radix), () -> new IntegerUtility(null));
     }
 
-    public ShortUtility convertToShort() {
-        return convertToNumber(this::mustConvertToShort, () -> new ShortUtility(null));
+    public Long toLong() {
+        return map(Long::parseLong).orElse(null);
     }
 
-    public ShortUtility convertToShort(int radix) {
-        return convertToNumber(() -> mustConvertToShort(radix), () -> new ShortUtility(null));
+    public LongUtility mapToLong() {
+        return mapToNumber(this::mustConvertToLong, () -> new LongUtility(null));
     }
 
-    private <T extends ComparableUtility<? extends Number>> T convertToNumber(
+    public Long toLong(int radix) {
+        return map(o -> Long.parseLong(o, radix)).orElse(null);
+    }
+
+    public LongUtility mapToLong(int radix) {
+        return mapToNumber(() -> mustConvertToLong(radix), () -> new LongUtility(null));
+    }
+
+    public Short toShort() {
+        return map(Short::parseShort).orElse(null);
+    }
+
+    public ShortUtility mapToShort() {
+        return mapToNumber(this::mustConvertToShort, () -> new ShortUtility(null));
+    }
+
+    public Short toShort(int radix) {
+        return map(o -> Short.parseShort(o, radix)).orElse(null);
+    }
+
+    public ShortUtility mapToShort(int radix) {
+        return mapToNumber(() -> mustConvertToShort(radix), () -> new ShortUtility(null));
+    }
+
+    private <T extends ComparableUtility<? extends Number>> T mapToNumber(
             Supplier<T> utility,
             Supplier<T> defaultValueSupplier) {
         $(utility).mustNotBeNull();
@@ -83,7 +119,7 @@ public class StringUtility extends ComparableUtility<String> {
     }
 
     public DateUtility mustConvertToDate() {
-        return mustConvertToInstant().convertToDate();
+        return mustConvertToInstant().mapToDate();
     }
 
     public DoubleUtility mustConvertToDouble() {
@@ -99,27 +135,27 @@ public class StringUtility extends ComparableUtility<String> {
     }
 
     public IntegerUtility mustConvertToInteger() {
-        return $(map(Integer::parseInt).orElse(null));
+        return $(toInteger());
     }
 
     public IntegerUtility mustConvertToInteger(int radix) {
-        return $(map(o -> Integer.parseInt(o, radix)).orElse(null));
+        return $(toInteger(radix));
     }
 
     public LongUtility mustConvertToLong() {
-        return $(map(Long::parseLong).orElse(null));
+        return $(toLong());
     }
 
     public LongUtility mustConvertToLong(int radix) {
-        return $(map(o -> Long.parseLong(o, radix)).orElse(null));
+        return $(toLong(radix));
     }
 
     public ShortUtility mustConvertToShort() {
-        return $(map(Short::parseShort).orElse(null));
+        return $(toShort());
     }
 
     public ShortUtility mustConvertToShort(int radix) {
-        return $(map(o -> Short.parseShort(o, radix)).orElse(null));
+        return $(toShort(radix));
     }
 
     public StringUtility empty() {

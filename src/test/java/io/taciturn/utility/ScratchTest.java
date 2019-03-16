@@ -12,7 +12,7 @@ public class ScratchTest {
     @Test
     public void scratch() throws Exception {
         $("a", "3", "2")
-                .mapEach(i -> $(i).convertToInteger(16).orElse(null))
+                .mapEach(i -> $(i).toInteger(16))
                 .filterEach(Objects::nonNull)
                 .reduce((a, b) -> a + b)
                 .ifPresent(System.out::println);

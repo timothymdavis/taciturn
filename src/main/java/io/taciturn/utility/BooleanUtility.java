@@ -15,7 +15,7 @@ public class BooleanUtility extends ComparableUtility<Boolean> {
         return map(o -> Boolean.toString(o)).orElse(null);
     }
 
-    public StringUtility convertToString() {
+    public StringUtility mapToString() {
         return $(toString());
     }
 

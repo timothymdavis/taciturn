@@ -15,7 +15,7 @@ public class FloatUtility extends ComparableUtility<Float> {
         return map(o -> Float.toString(o)).orElse(null);
     }
 
-    public StringUtility convertToString() {
+    public StringUtility mapToString() {
         return $(toString());
     }
 

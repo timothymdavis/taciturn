@@ -10,9 +10,13 @@ public class InstantUtility extends ComparableUtility<Instant> {
     public InstantUtility(Instant object) {
         super(object);
     }
-    
-    public DateUtility convertToDate() {
-        return $(map(Date::from).orElse(null));
+
+    public Date toDate() {
+        return map(Date::from).orElse(null);
+    }
+
+    public DateUtility mapToDate() {
+        return $(toDate());
     }
 
     @Override
@@ -20,7 +24,7 @@ public class InstantUtility extends ComparableUtility<Instant> {
         return map(Instant::toString).orElse(null);
     }
 
-    public StringUtility convertToString() {
+    public StringUtility mapToString() {
         return $(toString());
     }
 

@@ -16,8 +16,8 @@ public class CharacterUtilityTest {
 
     @Test
     public void testConvertToString() throws Exception {
-        Assert.assertThat($('a').convertToString().orElse(null), is("a"));
-        Assert.assertThat($((Character) null).convertToString().orElse(null), is((String) null));
+        Assert.assertThat($('a').mapToString().orElse(null), is("a"));
+        Assert.assertThat($((Character) null).mapToString().orElse(null), is((String) null));
     }
 
     @Test

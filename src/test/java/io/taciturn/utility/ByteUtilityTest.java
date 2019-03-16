@@ -16,8 +16,8 @@ public class ByteUtilityTest {
 
     @Test
     public void testConvertToString() throws Exception {
-        Assert.assertThat($((byte) 1).convertToString().orElse(null), is("1"));
-        Assert.assertThat($((Byte) null).convertToString().orElse(null), is((String) null));
+        Assert.assertThat($((byte) 1).mapToString().orElse(null), is("1"));
+        Assert.assertThat($((Byte) null).mapToString().orElse(null), is((String) null));
     }
 
     @Test

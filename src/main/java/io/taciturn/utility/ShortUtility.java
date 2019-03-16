@@ -15,7 +15,7 @@ public class ShortUtility extends ComparableUtility<Short> {
         return map(o -> Short.toString(o)).orElse(null);
     }
 
-    public StringUtility convertToString() {
+    public StringUtility mapToString() {
         return $(toString());
     }
 

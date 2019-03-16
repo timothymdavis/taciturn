@@ -21,7 +21,7 @@ public class DateUtility extends ComparableUtility<Date> {
         return map(Date::toString).orElse(null);
     }
 
-    public StringUtility convertToString() {
+    public StringUtility mapToString() {
         return $(toString());
     }
 
