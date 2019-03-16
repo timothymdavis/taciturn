@@ -1,6 +1,8 @@
 package io.taciturn;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -18,8 +20,10 @@ import io.taciturn.utility.DoubleUtility;
 import io.taciturn.utility.FloatUtility;
 import io.taciturn.utility.InstantUtility;
 import io.taciturn.utility.IntegerUtility;
+import io.taciturn.utility.LocalDateTimeUtility;
 import io.taciturn.utility.LongUtility;
 import io.taciturn.utility.ObjectUtility;
+import io.taciturn.utility.OffsetDateTimeUtility;
 import io.taciturn.utility.ShortUtility;
 import io.taciturn.utility.StreamUtility;
 import io.taciturn.utility.StringUtility;
@@ -137,8 +141,16 @@ public class Utility {
         return new IntegerUtility(object);
     }
 
+    public static LocalDateTimeUtility $(LocalDateTime object) {
+        return new LocalDateTimeUtility(object);
+    }
+
     public static LongUtility $(Long object) {
         return new LongUtility(object);
+    }
+
+    public static OffsetDateTimeUtility $(OffsetDateTime object) {
+        return new OffsetDateTimeUtility(object);
     }
 
     public static ShortUtility $(Short object) {

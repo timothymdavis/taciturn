@@ -1,7 +1,9 @@
 package io.taciturn.utility;
 
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -28,10 +30,6 @@ public class StringUtility extends ComparableUtility<String> {
         return $(toBoolean());
     }
 
-    public DateUtility mapToDate() {
-        return mapToInstant().mapToDate();
-    }
-
     public Double toDouble() {
         return map(Double::parseDouble).orElse(null);
     }
@@ -46,15 +44,6 @@ public class StringUtility extends ComparableUtility<String> {
 
     public FloatUtility mapToFloat() {
         return mapToNumber(this::mustConvertToFloat, () -> new FloatUtility(null));
-    }
-
-    public InstantUtility mapToInstant() {
-        try {
-            return mustConvertToInstant();
-        }
-        catch (DateTimeParseException e) {
-            return new InstantUtility(null);
-        }
     }
 
     public Integer toInteger() {
@@ -118,8 +107,31 @@ public class StringUtility extends ComparableUtility<String> {
         }
     }
 
+    /**
+     * @return Date parsed using the {@link DateTimeFormatter#ISO_INSTANT} format, such as '2011-12-03T10:15:30Z'.
+     */
+    public Date toDate() {
+        return mapToInstant().toDate();
+    }
+
+    public DateUtility mapToDate() {
+        return mapToInstant().mapToDate();
+    }
+
     public DateUtility mustConvertToDate() {
-        return mustConvertToInstant().mapToDate();
+        return $(toDate());
+    }
+
+    public Date toDate(DateTimeFormatter dateTimeFormatter) {
+        return mapToInstant(dateTimeFormatter).toDate();
+    }
+
+    public DateUtility mapToDate(DateTimeFormatter dateTimeFormatter) {
+        return mapToInstant(dateTimeFormatter).mapToDate();
+    }
+
+    public DateUtility mustConvertToDate(DateTimeFormatter dateTimeFormatter) {
+        return $(toDate(dateTimeFormatter));
     }
 
     public DoubleUtility mustConvertToDouble() {
@@ -130,8 +142,41 @@ public class StringUtility extends ComparableUtility<String> {
         return $(map(Float::parseFloat).orElse(null));
     }
 
+    /**
+     * @return {@link Instant} parsed using the {@link DateTimeFormatter#ISO_INSTANT} format.
+     */
+    public Instant toInstant() {
+        return map(Instant::parse).orElse(null);
+    }
+
+    public InstantUtility mapToInstant() {
+        try {
+            return mustConvertToInstant();
+        }
+        catch (DateTimeParseException e) {
+            return new InstantUtility(null);
+        }
+    }
+
     public InstantUtility mustConvertToInstant() {
-        return $(map(Instant::parse).orElse(null));
+        return $(toInstant());
+    }
+
+    public Instant toInstant(DateTimeFormatter dateTimeFormatter) {
+        return map(o -> dateTimeFormatter.parse(o, Instant::from)).orElse(null);
+    }
+
+    public InstantUtility mapToInstant(DateTimeFormatter dateTimeFormatter) {
+        try {
+            return mustConvertToInstant(dateTimeFormatter);
+        }
+        catch (DateTimeParseException e) {
+            return new InstantUtility(null);
+        }
+    }
+
+    public InstantUtility mustConvertToInstant(DateTimeFormatter dateTimeFormatter) {
+        return $(toInstant(dateTimeFormatter));
     }
 
     public IntegerUtility mustConvertToInteger() {

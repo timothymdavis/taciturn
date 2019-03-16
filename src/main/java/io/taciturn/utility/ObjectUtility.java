@@ -336,7 +336,7 @@ public class ObjectUtility<Item> extends AbstractUtility<Item> {
     }
 
     @SuppressWarnings("unchecked")
-    public <Container extends Collection<Item>> CollectionUtility<Container, Item> to(Container collection) {
+    private <Container extends Collection<Item>> CollectionUtility<Container, Item> to(Container collection) {
         $(collection).mustNotBeNull();
         map(collection::add);
         return (CollectionUtility<Container, Item>) $(collection).filter(o -> !o.isEmpty());
