@@ -197,46 +197,83 @@ public class StreamUtility<Item> extends AbstractUtility<Stream<Item>> {
         return map(Stream::spliterator);
     }
 
+    public Item[] toArray(Class<? extends Item> itemType) {
+        return mapToArray(itemType).orElse($(itemType).newArray());
+    }
+
     @SuppressWarnings({ "unchecked", "ConstantConditions" })
-    public ArrayUtility<Item> toArray(Class<? extends Item> itemType) {
+    public ArrayUtility<Item> mapToArray(Class<? extends Item> itemType) {
+        $(itemType).mustNotBeNull("Cannot create an array without class.");
         return $(map(o -> o.toArray(i -> (Item[]) Array.newInstance(itemType, i))).orElse(null));
     }
 
-    public CollectionUtility<ArrayDeque<Item>, Item> toArrayDeque() {
+    public ArrayDeque<Item> toArrayDeque() {
+        return mapToArrayDeque().orElse(new ArrayDeque<>());
+    }
+
+    public CollectionUtility<ArrayDeque<Item>, Item> mapToArrayDeque() {
         return to(new ArrayDeque<>());
+    }
+
+    public LinkedList<Item> toLinkedList() {
+        return mapToLinkedList().orElse(new LinkedList<>());
+    }
+
+    public CollectionUtility<LinkedList<Item>, Item> mapToLinkedList() {
+        return to(new LinkedList<>());
+    }
+
+    public List<Item> toList() {
+        return toArrayList();
+    }
+
+    public CollectionUtility<? extends List<Item>, Item> mapToList() {
+        return mapToArrayList();
+    }
+
+    public ArrayList<Item> toArrayList() {
+        return mapToArrayList().orElse(new ArrayList<>());
+    }
+
+    public CollectionUtility<ArrayList<Item>, Item> mapToArrayList() {
+        return to(new ArrayList<>());
+    }
+
+    public PriorityQueue<Item> toPriorityQueue() {
+        return mapToPriorityQueue().orElse(new PriorityQueue<>());
+    }
+
+    public CollectionUtility<PriorityQueue<Item>, Item> mapToPriorityQueue() {
+        return to(new PriorityQueue<>());
+    }
+
+    public Set<Item> toSet() {
+        return toHashSet();
+    }
+
+    public CollectionUtility<? extends Set<Item>, Item> mapToSet() {
+        return mapToHashSet();
+    }
+
+    public HashSet<Item> toHashSet() {
+        return mapToHashSet().orElse(new HashSet<>());
+    }
+
+    public CollectionUtility<HashSet<Item>, Item> mapToHashSet() {
+        return to(new HashSet<>());
+    }
+
+    public Vector<Item> toVector() {
+        return mapToVector().orElse(new Vector<>());
+    }
+
+    public CollectionUtility<Vector<Item>, Item> mapToVector() {
+        return to(new Vector<>());
     }
 
     public <CollectionType extends Collection<Item>> CollectionUtility<CollectionType, Item> to(CollectionType collection) {
         ifPresent(o -> o.forEach(collection::add));
         return (CollectionUtility<CollectionType, Item>) $(collection).filter(o -> !o.isEmpty());
-    }
-
-    public CollectionUtility<LinkedList<Item>, Item> toLinkedList() {
-        return to(new LinkedList<>());
-    }
-
-    public CollectionUtility<? extends List<Item>, Item> toList() {
-        return toArrayList();
-    }
-
-    public CollectionUtility<ArrayList<Item>, Item> toArrayList() {
-        return to(new ArrayList<>());
-    }
-
-    public CollectionUtility<PriorityQueue<Item>, Item> toPriorityQueue() {
-        return to(new PriorityQueue<>());
-    }
-
-    public CollectionUtility<? extends Set<Item>, Item> toSet() {
-        return toHashSet();
-    }
-
-    public CollectionUtility<HashSet<Item>, Item> toHashSet() {
-        return to(new HashSet<>());
-    }
-
-    public CollectionUtility<Vector<Item>, Item> toVector() {
-        return to(new Vector<>());
     }
 
     public StreamUtility<Item> unordered() {

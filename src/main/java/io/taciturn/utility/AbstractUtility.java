@@ -83,6 +83,12 @@ public abstract class AbstractUtility<Item> {
     }
 
     @SuppressWarnings("unchecked")
+    public <T extends AbstractUtility<Item>> T mustNotBeNull(String message) {
+        Objects.requireNonNull(object.orElse(null), message);
+        return (T) this;
+    }
+
+    @SuppressWarnings("unchecked")
     public <T extends AbstractUtility<Item>> T mustNotBeNull() {
         Objects.requireNonNull(object.orElse(null));
         return (T) this;

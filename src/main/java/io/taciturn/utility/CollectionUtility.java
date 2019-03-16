@@ -29,56 +29,97 @@ import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public class CollectionUtility<Container extends Collection<Item>, Item> extends AbstractUtility<Container> {
-    
+
     private final StreamUtility<Item> streamUtility;
 
     public CollectionUtility(Container o) {
         super(o);
         streamUtility = new StreamUtility<>(map(Collection::stream).orElse(null));
     }
-    
-    public CollectionUtility<? extends Set<Item>, Item> toSet() {
+
+    public Set<Item> toSet() {
         return streamUtility.toSet();
     }
 
-    public CollectionUtility<HashSet<Item>, Item> toHashSet() {
+    public CollectionUtility<? extends Set<Item>, Item> mapToSet() {
+        return streamUtility.mapToSet();
+    }
+
+    public HashSet<Item> toHashSet() {
         return streamUtility.toHashSet();
     }
 
-    public CollectionUtility<ArrayList<Item>, Item> toArrayList() {
+    public CollectionUtility<HashSet<Item>, Item> mapToHashSet() {
+        return streamUtility.mapToHashSet();
+    }
+
+    public ArrayList<Item> toArrayList() {
         return streamUtility.toArrayList();
     }
 
-    public CollectionUtility<LinkedList<Item>, Item> toLinkedList() {
+    public CollectionUtility<ArrayList<Item>, Item> mapToArrayList() {
+        return streamUtility.mapToArrayList();
+    }
+
+    public LinkedList<Item> toLinkedList() {
         return streamUtility.toLinkedList();
     }
 
-    public CollectionUtility<? extends List<Item>, Item> toList() {
+    public CollectionUtility<LinkedList<Item>, Item> mapToLinkedList() {
+        return streamUtility.mapToLinkedList();
+    }
+
+    public List<Item> toList() {
         return streamUtility.toList();
     }
 
-    public CollectionUtility<PriorityQueue<Item>, Item> toPriorityQueue() {
+    public CollectionUtility<? extends List<Item>, Item> mapToList() {
+        return streamUtility.mapToList();
+    }
+
+    public PriorityQueue<Item> toPriorityQueue() {
         return streamUtility.toPriorityQueue();
     }
 
-    public CollectionUtility<Vector<Item>, Item> toVector() {
+    public CollectionUtility<PriorityQueue<Item>, Item> mapToPriorityQueue() {
+        return streamUtility.mapToPriorityQueue();
+    }
+
+    public Vector<Item> toVector() {
         return streamUtility.toVector();
     }
 
-    public ArrayUtility<Item> toArray(Class<? extends Item> itemType) {
+    public CollectionUtility<Vector<Item>, Item> mapToVector() {
+        return streamUtility.mapToVector();
+    }
+
+    public Item[] toArray(Class<? extends Item> itemType) {
         return streamUtility.toArray(itemType);
     }
 
-    public CollectionUtility<ArrayDeque<Item>, Item> toArrayDeque() {
+    public ArrayUtility<Item> mapToArray(Class<? extends Item> itemType) {
+        return streamUtility.mapToArray(itemType);
+    }
+
+    public ArrayDeque<Item> toArrayDeque() {
         return streamUtility.toArrayDeque();
     }
 
-    public StreamUtility<Item> toStream() {
+    public CollectionUtility<ArrayDeque<Item>, Item> mapToArrayDeque() {
+        return streamUtility.mapToArrayDeque();
+    }
+
+    public StreamUtility<Item> mapToStream() {
         return streamUtility;
     }
 
     @SuppressWarnings("unchecked")
-    public CollectionUtility<Collection<Item>, Item> asCollection() {
+    public Collection<Item> asCollection() {
+        return this.toList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public CollectionUtility<Collection<Item>, Item> mapAsCollection() {
         return (CollectionUtility<Collection<Item>, Item>) this;
     }
 

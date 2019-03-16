@@ -46,40 +46,76 @@ public class ArrayUtility<Item> extends AbstractUtility<Item[]> {
         this(toArray(first, rest));
     }
     
-    public CollectionUtility<? extends Set<Item>, Item> toSet() {
+    public Set<Item> toSet() {
         return streamUtility.toSet();
     }
 
-    public CollectionUtility<HashSet<Item>, Item> toHashSet() {
+    public CollectionUtility<? extends Set<Item>, Item> mapToSet() {
+        return streamUtility.mapToSet();
+    }
+
+    public HashSet<Item> toHashSet() {
         return streamUtility.toHashSet();
     }
 
-    public CollectionUtility<ArrayList<Item>, Item> toArrayList() {
+    public CollectionUtility<HashSet<Item>, Item> mapToHashSet() {
+        return streamUtility.mapToHashSet();
+    }
+
+    public ArrayList<Item> toArrayList() {
         return streamUtility.toArrayList();
     }
 
-    public CollectionUtility<LinkedList<Item>, Item> toLinkedList() {
+    public CollectionUtility<ArrayList<Item>, Item> mapToArrayList() {
+        return streamUtility.mapToArrayList();
+    }
+
+    public LinkedList<Item> toLinkedList() {
         return streamUtility.toLinkedList();
     }
 
-    public CollectionUtility<? extends List<Item>, Item> toList() {
+    public CollectionUtility<LinkedList<Item>, Item> mapToLinkedList() {
+        return streamUtility.mapToLinkedList();
+    }
+
+    public List<Item> toList() {
         return streamUtility.toList();
     }
 
-    public CollectionUtility<PriorityQueue<Item>, Item> toPriorityQueue() {
+    public CollectionUtility<? extends List<Item>, Item> mapToList() {
+        return streamUtility.mapToList();
+    }
+
+    public PriorityQueue<Item> toPriorityQueue() {
         return streamUtility.toPriorityQueue();
     }
 
-    public CollectionUtility<Vector<Item>, Item> toVector() {
+    public CollectionUtility<PriorityQueue<Item>, Item> mapToPriorityQueue() {
+        return streamUtility.mapToPriorityQueue();
+    }
+
+    public Vector<Item> toVector() {
         return streamUtility.toVector();
     }
 
-    public ArrayUtility<Item> toArray(Class<? extends Item> itemType) {
+    public CollectionUtility<Vector<Item>, Item> mapToVector() {
+        return streamUtility.mapToVector();
+    }
+
+    public Item[] toArray(Class<? extends Item> itemType) {
         return streamUtility.toArray(itemType);
     }
 
-    public CollectionUtility<ArrayDeque<Item>, Item> toArrayDeque() {
+    public ArrayUtility<Item> mapToArray(Class<? extends Item> itemType) {
+        return streamUtility.mapToArray(itemType);
+    }
+
+    public ArrayDeque<Item> toArrayDeque() {
         return streamUtility.toArrayDeque();
+    }
+
+    public CollectionUtility<ArrayDeque<Item>, Item> mapToArrayDeque() {
+        return streamUtility.mapToArrayDeque();
     }
 
     public StreamUtility<Item> toStream() {
@@ -91,14 +127,14 @@ public class ArrayUtility<Item> extends AbstractUtility<Item[]> {
     private static <Item> Item[] toArray(Item first, Item... rest) {
         $(first).mustNotBeNull();
         $(rest).mustNotBeNull();
-        $(first).mustBe(o -> $(rest).toList()
+        $(first).mustBe(o -> $(rest).mapToList()
                                     .map(Collection::stream)
                                     .map(c -> c.allMatch(i -> i != null && i.getClass() == o.getClass()))
                                     .orElse(false),
                         "The type of the first item must match the rest.");
-        CollectionUtility<ArrayList<Item>, Item> items = new ObjectUtility<>(first).toArrayList();
+        CollectionUtility<ArrayList<Item>, Item> items = new ObjectUtility<>(first).mapToArrayList();
         items.map(o -> o.addAll(Arrays.stream(rest).collect(Collectors.toList())));
-        return $(items.orElse(null)).toArray((Class<? extends Item>) first.getClass()).orElse(null);
+        return $(items.orElse(null)).mapToArray((Class<? extends Item>) first.getClass()).orElse(null);
     }
 
     public boolean allMatch(Predicate<? super Item> predicate) {

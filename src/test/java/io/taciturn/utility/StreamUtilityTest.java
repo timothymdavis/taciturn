@@ -20,62 +20,62 @@ public class StreamUtilityTest {
 
     @Test
     public void testTo() throws Exception {
-        assertThat($((Object) null).toStream().to(new ArrayList<>()).orElse(null), nullValue());
-        assertThat($(new Object()).toStream().to(new ArrayList<>()).orElse(null), instanceOf(ArrayList.class));
+        assertThat($((Object) null).mapToStream().to(new ArrayList<>()).orElse(null), nullValue());
+        assertThat($(new Object()).mapToStream().to(new ArrayList<>()).orElse(null), instanceOf(ArrayList.class));
     }
 
     @Test
-    public void testToArray() throws Exception {
-        assertThat($((Object) null).toStream().toArray(Object.class).orElse(null), nullValue());
-        assertThat($(new Object()).toStream().toArray(Object.class).orElse(null), instanceOf(Object[].class));
+    public void testToArrayUtility() throws Exception {
+        assertThat($((Object) null).mapToStream().mapToArray(Object.class).orElse(null), nullValue());
+        assertThat($(new Object()).mapToStream().mapToArray(Object.class).orElse(null), instanceOf(Object[].class));
     }
 
     @Test
-    public void testToArrayDeque() throws Exception {
-        assertThat($((Object) null).toStream().toArrayDeque().orElse(null), nullValue());
-        assertThat($(new Object()).toStream().toArrayDeque().orElse(null), instanceOf(ArrayDeque.class));
+    public void testToArrayDequeUtility() throws Exception {
+        assertThat($((Object) null).mapToStream().mapToArrayDeque().orElse(null), nullValue());
+        assertThat($(new Object()).mapToStream().mapToArrayDeque().orElse(null), instanceOf(ArrayDeque.class));
     }
 
     @Test
-    public void testToSet() throws Exception {
-        assertThat($((Object) null).toStream().toSet().orElse(null), nullValue());
-        assertThat($(new Object()).toStream().toSet().orElse(null), instanceOf(Set.class));
+    public void testToSetUtility() throws Exception {
+        assertThat($((Object) null).mapToStream().mapToSet().orElse(null), nullValue());
+        assertThat($(new Object()).mapToStream().mapToSet().orElse(null), instanceOf(Set.class));
     }
 
     @Test
-    public void testToHashSet() throws Exception {
-        assertThat($((Object) null).toStream().toHashSet().orElse(null), nullValue());
-        assertThat($(new Object()).toStream().toHashSet().orElse(null), instanceOf(HashSet.class));
+    public void testToHashSetUtility() throws Exception {
+        assertThat($((Object) null).mapToStream().mapToHashSet().orElse(null), nullValue());
+        assertThat($(new Object()).mapToStream().mapToHashSet().orElse(null), instanceOf(HashSet.class));
     }
 
     @Test
-    public void testToLinkedList() throws Exception {
-        assertThat($((Object) null).toStream().toLinkedList().orElse(null), nullValue());
-        assertThat($(new Object()).toStream().toLinkedList().orElse(null), instanceOf(LinkedList.class));
+    public void testToLinkedListUtility() throws Exception {
+        assertThat($((Object) null).mapToStream().mapToLinkedList().orElse(null), nullValue());
+        assertThat($(new Object()).mapToStream().mapToLinkedList().orElse(null), instanceOf(LinkedList.class));
     }
 
     @Test
-    public void testToList() throws Exception {
-        assertThat($((Object) null).toStream().toList().orElse(null), nullValue());
-        assertThat($(new Object()).toStream().toList().orElse(null), instanceOf(List.class));
+    public void testToListUtility() throws Exception {
+        assertThat($((Object) null).mapToStream().mapToList().orElse(null), nullValue());
+        assertThat($(new Object()).mapToStream().mapToList().orElse(null), instanceOf(List.class));
     }
 
     @Test
-    public void testToArrayList() throws Exception {
-        assertThat($((Object) null).toStream().toArrayList().orElse(null), nullValue());
-        assertThat($(new Object()).toStream().toArrayList().orElse(null), instanceOf(ArrayList.class));
+    public void testToArrayListUtility() throws Exception {
+        assertThat($((Object) null).mapToStream().mapToArrayList().orElse(null), nullValue());
+        assertThat($(new Object()).mapToStream().mapToArrayList().orElse(null), instanceOf(ArrayList.class));
     }
 
     @Test
-    public void testToPriorityQueue() throws Exception {
-        assertThat($((Object) null).toStream().toPriorityQueue().orElse(null), nullValue());
-        assertThat($(new Object()).toStream().toPriorityQueue().orElse(null), instanceOf(PriorityQueue.class));
+    public void testToPriorityQueueUtility() throws Exception {
+        assertThat($((Object) null).mapToStream().mapToPriorityQueue().orElse(null), nullValue());
+        assertThat($(new Object()).mapToStream().mapToPriorityQueue().orElse(null), instanceOf(PriorityQueue.class));
     }
 
     @Test
-    public void testToVector() throws Exception {
-        assertThat($((Object) null).toStream().toVector().orElse(null), nullValue());
-        assertThat($(new Object()).toStream().toVector().orElse(null), instanceOf(Vector.class));
+    public void testToVectorUtility() throws Exception {
+        assertThat($((Object) null).mapToStream().mapToVector().orElse(null), nullValue());
+        assertThat($(new Object()).mapToStream().mapToVector().orElse(null), instanceOf(Vector.class));
     }
 
 }
