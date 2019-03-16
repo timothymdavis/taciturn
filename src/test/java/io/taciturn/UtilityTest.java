@@ -5,14 +5,22 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
 import org.junit.Test;
 
 import static io.taciturn.Utility.$;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNull.nullValue;
 
 public class UtilityTest {
+
+    @Test
+    public void test$ClassUtility() throws Exception {
+        Assert.assertThat($(String.class).get(), instanceOf(Class.class));
+        Assert.assertThat($(String.class).newArray(5).length, equalTo(5));
+    }
 
     @Test
     public void test$NonIterableUtility() throws Exception {

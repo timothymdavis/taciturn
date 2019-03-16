@@ -11,6 +11,7 @@ import io.taciturn.utility.ArrayUtility;
 import io.taciturn.utility.BooleanUtility;
 import io.taciturn.utility.ByteUtility;
 import io.taciturn.utility.CharacterUtility;
+import io.taciturn.utility.ClassUtility;
 import io.taciturn.utility.CollectionUtility;
 import io.taciturn.utility.DateUtility;
 import io.taciturn.utility.DoubleUtility;
@@ -34,6 +35,10 @@ import io.taciturn.utility.StringUtility;
  * willing to put up with a small amount of chaos.
  */
 public class Utility {
+
+    public static <Item> ClassUtility<Item> $(Class<Item> object) {
+        return new ClassUtility<>(object);
+    }
 
     /**
      * Example code:
